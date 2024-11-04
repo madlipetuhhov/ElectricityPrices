@@ -3,38 +3,40 @@
     import {onMount} from "svelte";
 
     interface PriceData {
-        timestamp: number;
-        price: number;
+        timestamp: number
+        price: number
     }
 
+    type CountryCode = 'ee'|'lv'|'lt'|'fi'
+
     interface CountryData {
-        [countryCode: string]: PriceData[];
+        [countryCode: string]: PriceData[]
     }
 
     interface Response {
-        success: boolean;
-        data: CountryData;
+        success: boolean
+        data: CountryData
     }
 
-    let countryCode: string = 'ee';
-    let localPrices: PriceData[] = [];
-    let error: string | null = null;
+    let data: Record<CountryCode, Array<PriceData>> = {}
+    let localPrices: PriceData[] = []
+    let error: string | undefined
 
     onMount(async () => {
         try {
             const response = await fetch('https://dashboard.elering.ee/api/nps/price?start=2024-11-03T22:00:00.000Z&end=2024-11-04T21:59:59.999Z');
             if (!response.ok) {
-                throw new Error('Viga!');
+                throw new Error('Not a successful fetch!')
             }
-          const data: Response = await response.json();
+          const data: Response = await response.json()
             if (data.success) {
-                localPrices = data.data[countryCode];
+                localPrices = data.data['ee']
             } else {
-                throw new Error('Not successful fetch!')
+                throw new Error('Not a successful fetch!')
             }
 
         } catch (err) {
-            error = err instanceof Error ? err.message : 'Viga!';
+            error = err instanceof Error ? err.message : 'Not a successful fetch!'
         }
 
     });
