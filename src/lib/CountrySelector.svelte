@@ -1,6 +1,5 @@
 <script lang="ts">
     const countryCodes = ['ee', 'lv', 'lt', 'fi']
-
     export let countryCode = countryCodes[0]
 </script>
 

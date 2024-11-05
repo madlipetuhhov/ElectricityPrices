@@ -3,11 +3,10 @@
     import PriceFetcher from "./lib/PriceFetcher.svelte";
     import CountrySelector from "./lib/CountrySelector.svelte";
     import Chart from "./lib/Chart.svelte";
-    import type {CountryPrices} from "./store/store";
 
     let countryCode = 'ee'
     let date = new Date().toISOString().replace(/T.*/, '')
-    let prices: CountryPrices
+    let prices: Record<string, any> = {}
 </script>
 
 <main>
@@ -15,7 +14,7 @@
     <CountrySelector bind:countryCode/>
     <PriceFetcher {date} {countryCode} bind:prices/>
 
-    {JSON.stringify(prices)}
+    <pre>{JSON.stringify(prices, null, 2)}</pre>
 
     <!--    <Chart/>-->
 </main>

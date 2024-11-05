@@ -1,15 +1,22 @@
 <script lang="ts">
-    import type {CountryPrices} from "../store/store";
 
     export let date: string
     export let countryCode: string
-    export let prices: CountryPrices
+    export let prices: Record<string, any> = {}
 
-    let allPrices: Record<string, CountryPrices> = {}
+    // interface PriceData {
+    //     timestamp: number
+    //     price: number
+    // }
+
+    // // export interface CountryPrices {
+    // //     [countryCode: string]: PriceData[]
+    // // }
+
+    let allPrices: Record<string, any> = {}
 
     async function fetchPrices(date: string) {
         try {
-            // todo: url muutmine nii et kuupaev, kellaaeg muutuks
             const response = await fetch(`https://dashboard.elering.ee/api/nps/price?start=${date}T00:00:00.000Z&end=${date}T23:59:59.999Z`);
             if (!response.ok) {
                 throw new Error('Failed to fetch data')
