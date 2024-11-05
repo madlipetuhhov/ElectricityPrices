@@ -1,21 +1,22 @@
 <script lang="ts">
+    import type {CountryPrices} from "../store/store";
 
-    import {onMount} from "svelte";
-    import {pricesStore} from "../store/store.js";
+    export let date: string
+    export let countryCode: string
+    export let prices: CountryPrices
 
-    async function fetchPrices() {
+    let allPrices: Record<string, CountryPrices> = {}
+
+    async function fetchPrices(date: string) {
         try {
             // todo: url muutmine nii et kuupaev, kellaaeg muutuks
-            const response = await fetch('https://dashboard.elering.ee/api/nps/price?start=2024-11-03T22:00:00.000Z&end=2024-11-04T21:59:59.999Z');
+            const response = await fetch(`https://dashboard.elering.ee/api/nps/price?start=${date}T00:00:00.000Z&end=${date}T23:59:59.999Z`);
             if (!response.ok) {
                 throw new Error('Failed to fetch data')
             }
             const responseData = await response.json()
             if (responseData.success) {
-                pricesStore.update(state => ({
-                    ...state,
-                    prices: responseData.data
-                }));
+                allPrices = responseData.data
             } else {
                 console.error('API returned an unsuccessful response')
             }
@@ -26,5 +27,6 @@
 
     }
 
-    onMount(fetchPrices)
+    $: fetchPrices(date)
+    $: prices = allPrices[countryCode]
 </script>

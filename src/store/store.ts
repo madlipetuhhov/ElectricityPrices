@@ -5,11 +5,11 @@ interface PriceData {
     price: number
 }
 
-interface CountryData {
+export interface CountryPrices {
     [countryCode: string]: PriceData[]
 }
 
-export const pricesStore = writable<{ prices: CountryData; selectedCountry: string}>({
+export const pricesStore = writable<{ prices: CountryPrices; selectedCountry: string}>({
     prices: {},
     selectedCountry: 'ee',
 })

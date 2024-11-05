@@ -1,24 +1,14 @@
 <script lang="ts">
-    import {pricesStore} from "../store/store";
+    const countryCodes = ['ee', 'lv', 'lt', 'fi']
 
-    let countryCodes: string[] = ['ee', 'lv', 'lt', 'fi']
-
-    function changeCountry(event: Event) {
-        const selectedCountry = (event.target as HTMLSelectElement).value
-        pricesStore.update(state => ({
-            ...state,
-            selectedCountry
-        }))
-    }
+    export let countryCode = countryCodes[0]
 </script>
 
 <div>
     <label for="countryCode">Vali riik</label>
-    <select id="countryCode" on:change={changeCountry}>
+    <select id="countryCode" bind:value={countryCode}>
         {#each countryCodes as countryCode}
-            <option value={countryCode} selected={$pricesStore.selectedCountry === countryCode}>
-                {countryCode.toUpperCase()}
-            </option>
+            <option value={countryCode}>{countryCode.toUpperCase()}</option>
         {/each}
     </select>
 </div>
