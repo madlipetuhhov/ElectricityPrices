@@ -1,11 +1,14 @@
 <script lang="ts">
 
-    import LocalPrices from "./lib/PriceFetcher.svelte";
-    import DateSwitcher from "./lib/DateSwitcher.svelte";
+    import PriceFetcher from "./lib/PriceFetcher.svelte";
+    import CountrySelector from "./lib/CountrySelector.svelte";
+    import Chart from "./lib/Chart.svelte";
 </script>
 
 <main>
-    <LocalPrices/>
+    <PriceFetcher/>
+    <CountrySelector/>
+    <Chart/>
 </main>
 
 <style>

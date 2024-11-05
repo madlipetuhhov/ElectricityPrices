@@ -1,60 +1,30 @@
 <script lang="ts">
 
     import {onMount} from "svelte";
+    import {pricesStore} from "../store/store.js";
 
-    interface PriceData {
-        timestamp: number
-        price: number
-    }
-
-    type CountryCode = 'ee'|'lv'|'lt'|'fi'
-
-    interface CountryData {
-        [countryCode: string]: PriceData[]
-    }
-
-    interface Response {
-        success: boolean
-        data: CountryData
-    }
-
-    let data: Record<CountryCode, Array<PriceData>> = {}
-    let localPrices: PriceData[] = []
-    let error: string | undefined
-
-    onMount(async () => {
+    async function fetchPrices() {
         try {
+            // todo: url muutmine nii et kuupaev, kellaaeg muutuks
             const response = await fetch('https://dashboard.elering.ee/api/nps/price?start=2024-11-03T22:00:00.000Z&end=2024-11-04T21:59:59.999Z');
             if (!response.ok) {
-                throw new Error('Not a successful fetch!')
+                throw new Error('Failed to fetch data')
             }
-          const data: Response = await response.json()
-            if (data.success) {
-                localPrices = data.data['ee']
+            const responseData = await response.json()
+            if (responseData.success) {
+                pricesStore.update(state => ({
+                    ...state,
+                    prices: responseData.data
+                }));
             } else {
-                throw new Error('Not a successful fetch!')
+                console.error('API returned an unsuccessful response')
             }
 
         } catch (err) {
-            error = err instanceof Error ? err.message : 'Not a successful fetch!'
+            console.error('Error fetching data:', err)
         }
 
-    });
-</script>
+    }
 
-<div>
-    {#if error}
-        <p>Error: {error}</p>
-    {:else if localPrices.length === 0}
-        <p>Hindu pole saadaval.</p>
-    {:else}
-        <h2>{countryCode.toUpperCase()} hinnad:</h2>
-        <ul>
-            {#each localPrices as priceData}
-                <li>
-                    Aeg: {new Date(priceData.timestamp * 1000).toLocaleDateString()} - Hind: {priceData.price} EUR
-                </li>
-            {/each}
-        </ul>
-    {/if}
-</div>
+    onMount(fetchPrices)
+</script>
