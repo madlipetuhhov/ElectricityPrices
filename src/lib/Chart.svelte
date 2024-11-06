@@ -1,7 +1,7 @@
 <script lang="ts">
     import {onMount} from "svelte";
 
-    export let prices: Record<string, any> = {}
+    export let prices: { timestamp: number; price: number }[] = []
 
     type BarData = {
         label: string
@@ -11,41 +11,26 @@
     let data: BarData[] = []
     let canvas: HTMLCanvasElement
 
-    $: if (prices) {
+    $: if (prices.length > 0) {
         formatData();
     }
 
     function formatData() {
-        const countryData = prices || []
-        data = countryData.map((priceData: {timestamp: number; price: number}) => ({
-                label: new Date(priceData.timestamp * 1000).toLocaleDateString(),
-                value: priceData.price
-            })
+        data = prices.map((priceData) => {
+                // Format the timestamp into hours and minutes (HH:mm)
+                const date = new Date(priceData.timestamp * 1000); // Convert to milliseconds
+                const hours = date.getHours().toString().padStart(2, '0'); // Add leading zero for hours
+                const minutes = date.getMinutes().toString().padStart(2, '0'); // Add leading zero for minutes
+                const formattedTime = `${hours}:${minutes}`; // Format time as HH:mm
+
+                return {
+                    label: formattedTime,  // Formatted time
+                    value: priceData.price  // Price for that timestamp
+                };
+            }
         )
     }
 
-    // const selectedCountryData = derived(pricesStore, () => {
-    //         const countryData = $pricesStore.prices[$pricesStore.selectedCountry] || []
-    //
-    //         return countryData.map((priceData) => ({
-    //                 label: new Date(priceData.timestamp * 1000).toLocaleDateString(),
-    //                 value: priceData.price
-    //             })
-    //         )
-    //     }
-    // )
-    //
-    // selectedCountryData.subscribe(() => {
-    //     data = $selectedCountryData
-    //     if (canvas) {
-    //         const contextObject = canvas.getContext('2d')
-    //         if (contextObject) {
-    //             drawChart(contextObject)
-    //         } else {
-    //             console.error('Failed to get 2d context')
-    //         }
-    //     }
-    // });
 
     function drawChart(contextObject: CanvasRenderingContext2D) {
 

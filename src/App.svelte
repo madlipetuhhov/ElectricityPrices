@@ -6,8 +6,7 @@
 
     let countryCode = 'ee'
     let date = new Date().toISOString().replace(/T.*/, '')
-    let prices: Record<string, any> = {}
-
+    let prices: { timestamp: number; price: number }[] = []
 </script>
 
 <main>
