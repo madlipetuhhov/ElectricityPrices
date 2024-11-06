@@ -5,6 +5,7 @@
     export let prices: { timestamp: number, price: number }[] = []
 
     let allPrices: { [country: string]: { timestamp: number, price: number }[] } = {}
+console.log(allPrices)
 
     async function fetchPrices(date: string) {
         try {
@@ -28,4 +29,5 @@
     $: fetchPrices(date)
     $: prices = allPrices[countryCode]
 </script>
+
 
