@@ -4,7 +4,6 @@
     export let countryCode: string
     export let prices: { timestamp: number, price: number }[] = []
 
-
     let allPrices: { [country: string]: { timestamp: number, price: number }[] } = {}
 
     async function fetchPrices(date: string) {

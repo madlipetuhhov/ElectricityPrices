@@ -8,14 +8,15 @@
     let countryCode = 'ee'
     let date = new Date().toISOString().replace(/T.*/, '')
     export let prices: { timestamp: number, price: number }[] = []
+    export let formattedTimeAndPrice: { time: string, price: number }[] = []
 </script>
 
 <main>
     <input type="date" bind:value={date}>
     <CountrySelector bind:countryCode/>
     <DataFetcher {date} {countryCode} bind:prices/>
-    <Chart {prices}/>
-    <DataMapper {prices}/>
+    <DataMapper {prices} bind:formattedTimeAndPrice/>
+    <Chart {formattedTimeAndPrice}/>
 
 
     <pre>{JSON.stringify(prices, null, 2)}</pre>
