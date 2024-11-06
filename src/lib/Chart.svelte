@@ -1,6 +1,7 @@
 <!--<script lang="ts">-->
-<!--    import {derived} from "svelte/store";-->
 <!--    import {onMount} from "svelte";-->
+
+<!--    export let prices: Record<string, any> = {}-->
 
 <!--    type BarData = {-->
 <!--        label: string-->
@@ -10,28 +11,41 @@
 <!--    let data: BarData[] = []-->
 <!--    let canvas: HTMLCanvasElement-->
 
-<!--    const selectedCountryData = derived(pricesStore, () => {-->
-<!--            const countryData = $pricesStore.prices[$pricesStore.selectedCountry] || []-->
+<!--    $: if (prices) {-->
+<!--        formatData();-->
+<!--    }-->
 
-<!--            return countryData.map((priceData) => ({-->
-<!--                    label: new Date(priceData.timestamp * 1000).toLocaleDateString(),-->
-<!--                    value: priceData.price-->
-<!--                })-->
-<!--            )-->
-<!--        }-->
-<!--    )-->
+<!--    function formatData() {-->
+<!--        const countryData = prices || []-->
+<!--        data = countryData.map((priceData: {timestamp: number; price: number}) => ({-->
+<!--                label: new Date(priceData.timestamp * 1000).toLocaleDateString(),-->
+<!--                value: priceData.price-->
+<!--            })-->
+<!--        )-->
+<!--    }-->
 
-<!--    selectedCountryData.subscribe(() => {-->
-<!--        data = $selectedCountryData-->
-<!--        if (canvas) {-->
-<!--            const contextObject = canvas.getContext('2d')-->
-<!--            if (contextObject) {-->
-<!--                drawChart(contextObject)-->
-<!--            } else {-->
-<!--                console.error('Failed to get 2d context')-->
-<!--            }-->
-<!--        }-->
-<!--    });-->
+<!--    // const selectedCountryData = derived(pricesStore, () => {-->
+<!--    //         const countryData = $pricesStore.prices[$pricesStore.selectedCountry] || []-->
+<!--    //-->
+<!--    //         return countryData.map((priceData) => ({-->
+<!--    //                 label: new Date(priceData.timestamp * 1000).toLocaleDateString(),-->
+<!--    //                 value: priceData.price-->
+<!--    //             })-->
+<!--    //         )-->
+<!--    //     }-->
+<!--    // )-->
+<!--    //-->
+<!--    // selectedCountryData.subscribe(() => {-->
+<!--    //     data = $selectedCountryData-->
+<!--    //     if (canvas) {-->
+<!--    //         const contextObject = canvas.getContext('2d')-->
+<!--    //         if (contextObject) {-->
+<!--    //             drawChart(contextObject)-->
+<!--    //         } else {-->
+<!--    //             console.error('Failed to get 2d context')-->
+<!--    //         }-->
+<!--    //     }-->
+<!--    // });-->
 
 <!--    function drawChart(contextObject: CanvasRenderingContext2D) {-->
 

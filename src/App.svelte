@@ -7,16 +7,18 @@
     let countryCode = 'ee'
     let date = new Date().toISOString().replace(/T.*/, '')
     let prices: Record<string, any> = {}
+    // let selectedCountry = ''
 </script>
 
 <main>
     <input type="date" bind:value={date}>
     <CountrySelector bind:countryCode/>
     <PriceFetcher {date} {countryCode} bind:prices/>
+    <Chart {prices}/>
 
     <pre>{JSON.stringify(prices, null, 2)}</pre>
 
-    <!--    <Chart/>-->
+
 </main>
 
 <style>
