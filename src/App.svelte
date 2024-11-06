@@ -1,19 +1,22 @@
 <script lang="ts">
 
-    import PriceFetcher from "./lib/PriceFetcher.svelte";
+    import DataFetcher from "./lib/DataFetcher.svelte";
     import CountrySelector from "./lib/CountrySelector.svelte";
     import Chart from "./lib/Chart.svelte";
+    import DataMapper from "./lib/DataMapper.svelte";
 
     let countryCode = 'ee'
     let date = new Date().toISOString().replace(/T.*/, '')
-    let prices: { timestamp: number; price: number }[] = []
+    export let prices: { timestamp: number, price: number }[] = []
 </script>
 
 <main>
     <input type="date" bind:value={date}>
     <CountrySelector bind:countryCode/>
-    <PriceFetcher {date} {countryCode} bind:prices/>
+    <DataFetcher {date} {countryCode} bind:prices/>
     <Chart {prices}/>
+    <DataMapper {prices}/>
+
 
     <pre>{JSON.stringify(prices, null, 2)}</pre>
 

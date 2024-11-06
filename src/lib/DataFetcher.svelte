@@ -2,14 +2,10 @@
 
     export let date: string
     export let countryCode: string
-    export let prices: { timestamp: number; price: number }[] = []
+    export let prices: { timestamp: number, price: number }[] = []
 
-    interface PriceData {
-        timestamp: number
-        price: number
-    }
 
-    let allPrices: Record<string, PriceData[]> = {}
+    let allPrices: { [country: string]: { timestamp: number, price: number }[] } = {}
 
     async function fetchPrices(date: string) {
         try {
@@ -33,3 +29,4 @@
     $: fetchPrices(date)
     $: prices = allPrices[countryCode]
 </script>
+
