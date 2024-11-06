@@ -1,26 +1,23 @@
-// import {describe, it, expect, test} from "vitest";
-// import CountrySelector from "../lib/CountrySelector.svelte";
-// import {fireEvent, render, screen} from "@testing-library/svelte";
-// import DataMapper from "../lib/DataMapper.svelte";
-//
-//
-// describe('DataMapper', () => {
-//     it('should return hh:mm', () => {
-//         const prices = [
-//             {timestamp: 1730851200, price: 3.82},
-//             {timestamp: 1730854800, price: 4.02},
-//         ]
-//
-//         const {container} = render(DataMapper, {
-//             props: {prices},
-//         })
-//         // Access the internal state (formattedData) of the component
-//         const formattedData = component.$$.ctx[2]; // Access the formattedData in the Svelte component context
-//
-//         // Verify that the formattedData is correctly transformed
-//         expect(formattedData).toEqual([
-//             { time: '00:00', price: 3.82 },
-//             { time: '01:00', price: 4.02 },
-//         ]);
-//     })
-// })
+import {describe, it, expect} from "vitest";
+import {render} from "@testing-library/svelte";
+import DataMapper from "../lib/DataMapper.svelte";
+
+
+describe('DataMapper', () => {
+    it('should return time hh:mm and price cent/kWh', () => {
+        const testData = [
+            {timestamp: 1730890800, price: 74.8300},
+            {timestamp: 1730894400, price: 89.2300},
+        ]
+        const {component} = render(DataMapper, {prices: testData})
+        const result = component.formatTimeAndPrice(testData)
+        const expectedData = [
+            {time: '13:00', price: 9.13},
+            {time: '14:00', price: 10.89},
+        ]
+        expectedData.forEach((expected, index) => {
+            expect(result[index].time).toBe(expected.time)
+            expect(result[index].price).toBeCloseTo(expected.price, 2)
+        })
+    })
+})

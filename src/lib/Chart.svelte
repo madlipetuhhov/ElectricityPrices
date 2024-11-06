@@ -6,7 +6,7 @@
 <div class="chart-container">
     {#each formattedTimeAndPrice as { time, price }}
         <div class="bar" style="height: {price * 2}px;">
-            <div class="bar-price">€{price}</div>
+            <div class="bar-price">{price} s/kWh</div>
             <div class="bar-label">{time}</div>
         </div>
     {/each}
@@ -28,7 +28,7 @@
 
     .bar {
         width: 50px;
-        background-color: #4caf50;
+        background-color: #ef58e8;
         text-align: center;
         position: relative;
         transition: height 0.3s ease;

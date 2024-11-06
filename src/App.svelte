@@ -19,7 +19,7 @@
     <Chart {formattedTimeAndPrice}/>
 
 
-    <pre>{JSON.stringify(prices, null, 2)}</pre>
+<!--    <pre>{JSON.stringify(prices, null, 2)}</pre>-->
 
 
 </main>
