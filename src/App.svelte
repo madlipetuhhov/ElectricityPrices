@@ -7,7 +7,7 @@
     let countryCode = 'ee'
     let date = new Date().toISOString().replace(/T.*/, '')
     let prices: Record<string, any> = {}
-    // let selectedCountry = ''
+
 </script>
 
 <main>

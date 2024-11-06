@@ -4,16 +4,16 @@
     export let countryCode: string
     export let prices: Record<string, any> = {}
 
-    // interface PriceData {
-    //     timestamp: number
-    //     price: number
-    // }
+    interface PriceData {
+        timestamp: number
+        price: number
+    }
 
     // // export interface CountryPrices {
     // //     [countryCode: string]: PriceData[]
     // // }
 
-    let allPrices: Record<string, any> = {}
+    let allPrices: Record<string, PriceData> = {}
 
     async function fetchPrices(date: string) {
         try {
