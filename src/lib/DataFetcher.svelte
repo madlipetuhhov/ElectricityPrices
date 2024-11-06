@@ -1,12 +1,11 @@
 <script lang="ts">
-
     export let date: string
     export let countryCode: string
     export let prices: { timestamp: number, price: number }[] = []
 
     let allPrices: { [country: string]: { timestamp: number, price: number }[] } = {}
 
-    async function fetchPrices(date: string) {
+    export async function fetchData(date: string) {
         try {
             const response = await fetch(`https://dashboard.elering.ee/api/nps/price?start=${date}T00:00:00.000Z&end=${date}T23:59:59.999Z`);
             if (!response.ok) {
@@ -25,8 +24,8 @@
 
     }
 
-    $: fetchPrices(date)
+    $: fetchData(date)
     $: prices = allPrices[countryCode]
 </script>
 
-
+<svelte:options accessors/>

@@ -18,9 +18,9 @@
         justify-content: space-between;
         align-items: flex-end;
         width: 100%;
-        height: 300px;
-        border-left: 2px solid #333;
-        border-bottom: 2px solid #333;
+        /*height: 300px;*/
+        border-left: 2px solid #73095a;
+        border-bottom: 2px solid #73095a;
         margin: 20px 0;
         padding: 10px;
         box-sizing: border-box;
