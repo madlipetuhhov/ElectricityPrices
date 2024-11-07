@@ -14,7 +14,7 @@
 
 <main>
     <input type="date" bind:value={date}>
-    <CountrySelector className="country-selector" bind:countryCode/>
+    <CountrySelector bind:countryCode/>
     <DataFetcher {date} {countryCode} bind:prices/>
     <DataMapper {prices} bind:formattedTimeAndPrice/>
     <Chart {formattedTimeAndPrice}/>
@@ -23,8 +23,6 @@
 </main>
 
 <style>
-div.country-selector{
 
-}
 
 </style>

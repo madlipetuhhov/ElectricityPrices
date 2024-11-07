@@ -4,15 +4,18 @@
     box-sizing: border-box;
 }
 
+html {
+    /* 62.5% of 16px = 10px */
+    font-size: 62.5%;
+}
+
 body, html {
     font-family: "Roboto Light", sans-serif;
-    color: #5B4348;
     height: 100%;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #FCF6F7;
 }
 
 
