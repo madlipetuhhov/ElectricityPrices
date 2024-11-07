@@ -1,6 +1,6 @@
 <script lang="ts">
     export let prices: { timestamp: number, price: number }[] = []
-    export let formattedTimeAndPrice: { time: string, price: number }[] = []
+    export let formattedTimeAndPrice: { time: string, price: string }[] = []
 
     function convertEuroMWhToCentKWh(priceInEuroMWh: number): number {
         const convertedPrice = ((priceInEuroMWh * 100) / 1000) * 1.22;
@@ -15,7 +15,7 @@
             const time = `${hours}:${minutes}`
 
             const convertedPrice = convertEuroMWhToCentKWh(price)
-            return {time, price: convertedPrice}
+            return {time, price: convertedPrice.toFixed(2)}
         })
     }
 

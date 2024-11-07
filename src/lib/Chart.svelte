@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let formattedTimeAndPrice: { time: string, price: number }[] = []
+    export let formattedTimeAndPrice: { time: string, price: string }[] = []
     console.log(formattedTimeAndPrice)
 
 
@@ -9,11 +9,6 @@
 <main>
     <div class="chart-wrapper">
         <div class="y-axis-label">Hind (s/kWh)</div>
-        <!--        <div class="y-axis">-->
-        <!--            {#each yAxisData as data, index}-->
-        <!--                <div class="y-axis-data">{data.toFixed(0)}</div>-->
-        <!--            {/each}-->
-        <!--        </div>-->
         <div class="chart-container">
             {#each formattedTimeAndPrice as {time, price}}
                 <div class="bar" style="height: {price}em;">
@@ -53,7 +48,6 @@
 
     .bar:hover {
         background-color: #CC9AA2;
-        height: 10em;
     }
 
     .bar-label {

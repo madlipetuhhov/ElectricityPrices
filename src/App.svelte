@@ -13,7 +13,7 @@
 </script>
 
 <main>
-    <input type="date" bind:value={date}>
+    <input type="date" bind:value={date}/>
     <CountrySelector bind:countryCode/>
     <DataFetcher {date} {countryCode} bind:prices/>
     <DataMapper {prices} bind:formattedTimeAndPrice/>
@@ -30,5 +30,4 @@
         align-items: center;
         gap: 2em;
     }
-
 </style>
