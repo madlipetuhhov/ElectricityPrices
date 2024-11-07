@@ -10,7 +10,6 @@
     }
 
     async function fetchData(date: string) {
-
         try {
             const startTime = adjustStartTimezoneForAPI(date)
             const response = await fetch(`https://dashboard.elering.ee/api/nps/price?start=${startTime}&end=${date}T23:59:59.999Z`);

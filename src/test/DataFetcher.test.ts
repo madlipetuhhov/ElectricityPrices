@@ -1,5 +1,5 @@
-import {beforeEach, describe, it, vi} from "vitest";
-import {render} from "@testing-library/svelte";
+import {beforeEach, describe, it, vi, expect} from "vitest";
+import {render, waitFor} from "@testing-library/svelte";
 import DataFetcher from "../lib/DataFetcher.svelte";
 import {tick} from "svelte";
 
@@ -7,10 +7,6 @@ describe('DataFetcher', async () => {
     beforeEach(() => {
         vi.clearAllMocks()
     })
-
-    // vi.spyOn(window, 'fetch')
-    // render(Fetching)
-    // expect(fetch).toHaveBeenCalledWith('hello')
 
     const testResponseData = {
         success: true,
@@ -27,22 +23,24 @@ describe('DataFetcher', async () => {
     }
 
     it('should fetch data from external API and pass it as a prop to the component', async () => {
-        vi.mock('fetch', vi.fn().mockResolvedValueOnce({
+        const fetchSpy = vi.spyOn(window, 'fetch').mockResolvedValueOnce({
             ok: true,
-            json: async () => testResponseData
-        }))
+            json: async () =>
+                testResponseData
+        } as Response)
 
-        const {component} = render(DataFetcher, {
-            date: '2024-11-06',
+        const testDate = '2024-11-06';
+        const expectedStartTime = new Date(new Date(testDate).setHours(0, 0, 0, 0)).toISOString();
+
+        render(DataFetcher, {
+            date: testDate,
             countryCode: 'ee'
         })
+        await waitFor(() => {
+            expect(fetchSpy).toHaveBeenCalledWith(
+                `https://dashboard.elering.ee/api/nps/price?start=${expectedStartTime}&end=${testDate}T23:59:59.999Z`
+            )
+        });
+    })
 
-        await tick()
-
-        // TODO:
-        // expect(component.prices).toEqual([
-        //     {timestamp: 1730890800, price: 74.83},
-        //     {timestamp: 1730894400, price: 89.23},
-        // ]);
-    });
 })
