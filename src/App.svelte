@@ -9,6 +9,7 @@
     let date = new Date().toISOString().replace(/T.*/, '')
     export let prices: { timestamp: number, price: number }[] = []
     export let formattedTimeAndPrice: { time: string, price: number }[] = []
+
 </script>
 
 <main>
@@ -18,12 +19,5 @@
     <DataMapper {prices} bind:formattedTimeAndPrice/>
     <Chart {formattedTimeAndPrice}/>
 
-
 <!--    <pre>{JSON.stringify(prices, null, 2)}</pre>-->
-
-
 </main>
-
-<style>
-
-</style>

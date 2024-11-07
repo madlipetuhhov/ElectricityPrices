@@ -5,9 +5,15 @@
 
     let allPrices: { [country: string]: { timestamp: number, price: number }[] } = {}
 
-    export async function fetchData(date: string) {
+    function adjustStartTimezoneForAPI(date: string): string {
+        return new Date(new Date(date).setHours(0, 0, 0, 0)).toISOString();
+    }
+
+    async function fetchData(date: string) {
+
         try {
-            const response = await fetch(`https://dashboard.elering.ee/api/nps/price?start=${date}T00:00:00.000Z&end=${date}T23:59:59.999Z`);
+            const startTime = adjustStartTimezoneForAPI(date)
+            const response = await fetch(`https://dashboard.elering.ee/api/nps/price?start=${startTime}&end=${date}T23:59:59.999Z`);
             if (!response.ok) {
                 throw new Error('Failed to fetch data')
             }
@@ -21,7 +27,6 @@
         } catch (err) {
             console.error('Error fetching data:', err)
         }
-
     }
 
     $: fetchData(date)

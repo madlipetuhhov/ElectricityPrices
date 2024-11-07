@@ -1,5 +1,5 @@
-import {beforeEach, describe, expect, it, vi} from "vitest";
-import {render, waitFor} from "@testing-library/svelte";
+import {beforeEach, describe, it, vi} from "vitest";
+import {render} from "@testing-library/svelte";
 import DataFetcher from "../lib/DataFetcher.svelte";
 import {tick} from "svelte";
 
@@ -7,6 +7,10 @@ describe('DataFetcher', async () => {
     beforeEach(() => {
         vi.clearAllMocks()
     })
+
+    // vi.spyOn(window, 'fetch')
+    // render(Fetching)
+    // expect(fetch).toHaveBeenCalledWith('hello')
 
     const testResponseData = {
         success: true,

@@ -3,14 +3,16 @@
 
 </script>
 
-<div class="chart-container">
-    {#each formattedTimeAndPrice as { time, price }}
-        <div class="bar" style="height: {price * 2}px;">
-            <div class="bar-price">{price} s/kWh</div>
-            <div class="bar-label">{time}</div>
-        </div>
-    {/each}
-</div>
+<main>
+    <div class="chart-container">
+        {#each formattedTimeAndPrice as {time, price}}
+            <div class="bar" style="height: {price * 2}px;">
+                <div class="bar-price">{price} s/kWh</div>
+                <div class="bar-label">{time}</div>
+            </div>
+        {/each}
+    </div>
+</main>
 
 <style>
     .chart-container {
