@@ -1,13 +1,7 @@
 <script lang="ts">
     export let formattedTimeAndPrice: { time: string, price: number }[] = []
-    let minPrice = Math.min(...formattedTimeAndPrice.map(data => data.price));
-    let maxPrice = Math.max(...formattedTimeAndPrice.map(data => data.price));
+    console.log(formattedTimeAndPrice)
 
-    let yAxisStep = (maxPrice - minPrice) / 5;
-    let yAxisLabels = [];
-    for (let i = 0; i <= 5; i++) {
-        yAxisLabels.push(minPrice + i * yAxisStep);
-    }
 
 </script>
 <!--todo: negatiivsed hinnad-->
@@ -15,11 +9,11 @@
 <main>
     <div class="chart-wrapper">
         <div class="y-axis-label">Hind (s/kWh)</div>
-        <div class="y-axis">
-            {#each yAxisLabels as label, index}
-                <div class="y-axis-data">{label.toFixed(2)}</div>
-            {/each}
-        </div>
+        <!--        <div class="y-axis">-->
+        <!--            {#each yAxisData as data, index}-->
+        <!--                <div class="y-axis-data">{data.toFixed(0)}</div>-->
+        <!--            {/each}-->
+        <!--        </div>-->
         <div class="chart-container">
             {#each formattedTimeAndPrice as {time, price}}
                 <div class="bar" style="height: {price}em;">
@@ -28,7 +22,7 @@
                 </div>
             {/each}
         </div>
-<!--        <div class="x-axis-label">Tunnid</div>-->
+        <!--        <div class="x-axis-label">Tunnid</div>-->
     </div>
 </main>
 
@@ -47,12 +41,12 @@
 
     .bar {
         width: 4.5em;
-        background-color: 	#E6ADB7;
+        background-color: #E6ADB7;
         text-align: center;
         position: relative;
         margin: 0.5em 0.5em 0 0.5em;
-        border-top-left-radius: 0.7em;
-        border-top-right-radius: 0.7em;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
         transition: background-color 0.3s ease, height 0.3s ease;
 
     }
@@ -84,7 +78,7 @@
         background-color: #664D51;
         color: #FFF9FA;
         padding: 0.5em 0.8em;
-        border-radius: 0.7em;
+        border-radius: 7px;
     }
 
     .bar:hover .bar-price {
@@ -107,7 +101,7 @@
         text-align: center;
         background-color: #664D51;
         padding: 0.5em 0.8em;
-        border-radius: 0.7em;
+        border-radius: 7px;
     }
 
 </style>
