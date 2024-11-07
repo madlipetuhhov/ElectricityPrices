@@ -1,18 +1,17 @@
 <script lang="ts">
+    import type {EleringPrices} from "./types";
+
     export let date: string
     export let countryCode: string
     export let prices: { timestamp: number, price: number }[] = []
 
-    let allPrices: { [country: string]: { timestamp: number, price: number }[] } = {}
-
-    function adjustStartTimezoneForAPI(date: string): string {
-        return new Date(new Date(date).setHours(0, 0, 0, 0)).toISOString();
-    }
+    let allPrices: EleringPrices = {}
 
     async function fetchData(date: string) {
         try {
-            const startTime = adjustStartTimezoneForAPI(date)
-            const response = await fetch(`https://dashboard.elering.ee/api/nps/price?start=${startTime}&end=${date}T23:59:59.999Z`);
+            const startTime = new Date(date + 'T00:00').toISOString();
+            const endTime = new Date(date + 'T23:59').toISOString();
+            const response = await fetch(`https://dashboard.elering.ee/api/nps/price?start=${startTime}&end=${endTime}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch data')
             }

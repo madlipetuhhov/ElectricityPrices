@@ -14,10 +14,17 @@
 
 <main>
     <input type="date" bind:value={date}>
-    <CountrySelector bind:countryCode/>
+    <CountrySelector className="country-selector" bind:countryCode/>
     <DataFetcher {date} {countryCode} bind:prices/>
     <DataMapper {prices} bind:formattedTimeAndPrice/>
     <Chart {formattedTimeAndPrice}/>
 
-<!--    <pre>{JSON.stringify(prices, null, 2)}</pre>-->
+    <!--    <pre>{JSON.stringify(prices, null, 2)}</pre>-->
 </main>
+
+<style>
+div.country-selector{
+
+}
+
+</style>

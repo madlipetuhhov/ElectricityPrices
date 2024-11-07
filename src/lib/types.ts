@@ -1,0 +1,1 @@
+export type EleringPrices = { [country: string]: { timestamp: number, price: number }[] }
