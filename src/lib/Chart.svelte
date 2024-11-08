@@ -17,13 +17,10 @@
                 </div>
             {/each}
         </div>
-        <!--        <div class="x-axis-label">Tunnid</div>-->
     </div>
 </main>
 
 <style>
-
-
     .chart {
         display: flex;
         justify-content: space-between;

@@ -9,7 +9,7 @@
     export let countryCode = countryCodes[0]
 </script>
 
-<div class="country-wrapper">
+<div class="country-container">
     <label class="country-label" for="countryCode">Vali riik</label>
     <select class="country-select" id="countryCode" bind:value={countryCode}>
         {#each countryCodes as countryCode}
@@ -19,28 +19,32 @@
 </div>
 
 <style>
-    .country-wrapper {
+    .country-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 2em;
+        gap: 1em;
     }
 
     .country-label {
-        font-size: 1.7em;
+        font-size: 1.6em;
         font-weight: 600;
     }
 
     .country-select {
         cursor: pointer;
-        padding: 0.3em 0.6em;
-        font-size: 1.7em;
+        padding: 0.4em 0.7em;
+        font-size: 1.6em;
         font-weight: 600;
         color: #FFF9FA;
         background-color: #664D51;
         border: none;
         border-radius: 7px;
         outline: none;
+    }
+
+    .country-select:hover {
+        background-color: #CC9AA2;
     }
 
     .country-select:focus {

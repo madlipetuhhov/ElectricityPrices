@@ -4,6 +4,7 @@
     import CountrySelector from "./lib/CountrySelector.svelte";
     import Chart from "./lib/Chart.svelte";
     import {formatTimeAndPrice} from "./utils/dataFormatter";
+    import DateSwitcher from "./lib/DateSwitcher.svelte";
 
     let countryCode = 'ee'
     let date = new Date().toISOString().replace(/T.*/, '')
@@ -13,20 +14,20 @@
     $: formattedTimeAndPrice = formatTimeAndPrice(prices);
 </script>
 
-<div class="container">
+<main class="container">
     <header>
         <DataFetcher {date} {countryCode} bind:prices/>
         <h1 class="main-header">Elektri hinnad</h1>
     </header>
     <div class="date-country-selection">
-        <input type="date" bind:value={date}/>
+        <DateSwitcher bind:date/>
         <CountrySelector bind:countryCode/>
     </div>
     <div class="chart">
         <Chart {formattedTimeAndPrice}/>
     </div>
     <!--    <pre>{JSON.stringify(prices, null, 2)}</pre>-->
-</div>
+</main>
 
 <style>
     .main-header {
@@ -38,7 +39,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 6rem;
+        gap: 7rem;
     }
 
     .container {
