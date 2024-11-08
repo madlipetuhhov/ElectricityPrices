@@ -7,7 +7,7 @@
 
     let allPrices: EleringPrices = {}
 
-    function getFetchUrl(date: string, countryCode: string) {
+    export function getFetchUrl(date: string, countryCode: string) {
         const startTime = new Date(date + 'T00:00').toISOString();
         const endTime = new Date(date + 'T23:59').toISOString();
         return `/api/nps/price?start=${startTime}&end=${endTime}&country=${countryCode}`;
