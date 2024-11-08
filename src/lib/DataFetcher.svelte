@@ -13,7 +13,7 @@
         return `/api/nps/price?start=${startTime}&end=${endTime}&country=${countryCode}`;
     }
 
-    async function fetchData(date: string) {
+    export async function fetchData(date: string) {
         try {
             const response = await fetch(getFetchUrl(date, countryCode));
             if (!response.ok) {
@@ -22,6 +22,7 @@
             const responseData = await response.json()
             if (responseData.success) {
                 allPrices = responseData.data
+                console.log(allPrices)
             } else {
                 console.error('API returned an unsuccessful response')
             }

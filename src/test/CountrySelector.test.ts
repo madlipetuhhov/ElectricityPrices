@@ -1,25 +1,39 @@
-import {expect, test} from "vitest";
+import {describe, expect, it} from "vitest";
 import CountrySelector from "../lib/CountrySelector.svelte";
-import {fireEvent, render, screen} from "@testing-library/svelte";
+import {fireEvent, render} from "@testing-library/svelte";
 
-test('should render options correctly', () => {
-    const {container} = render(CountrySelector, {countryCode: 'lv'})
+describe('CountrySelector', () => {
+    it('should default to the first countryCode when no value is passed', () => {
+        const { container } = render(CountrySelector);
+        expect(container.querySelector('select')!.value).toEqual('ee')
+    });
 
-    expect(container.querySelector('select')!.value).toEqual('lv')
+    it('should render option correctly', () => {
+        const {container} = render(CountrySelector, {countryCode: 'lv'})
+        expect(container.querySelector('select')!.value).toEqual('lv')
+    })
 
-    // const optionElements = screen.getAllByRole('option')
-    // expect(optionElements.length).toBe(4)
-    //
-    // expect(optionElements[0]).toHaveTextContent('EE')
-//
-})
+    it('should render right amount of options', () => {
+        const {container} = render(CountrySelector, {countryCode: 'ee'})
+        const options = container.querySelectorAll('.country-option')
+        expect(options.length).toBe(4)
+    });
 
+    it('should render correct option labels', () => {
+        const {container} = render(CountrySelector, {countryCode: 'ee'})
+        const options = container.querySelectorAll('.country-option')
+        expect(options[0].textContent).toBe('Eesti')
+        expect(options[1].textContent).toBe('Läti')
+        expect(options[2].textContent).toBe('Leedu')
+        expect(options[3].textContent).toBe('Soome')
+    });
 
-test('dropdown should update the selected country', async () => {
-    render(CountrySelector);
+    it('dropdown should update the selected country', async () => {
+        const {container} = render(CountrySelector, {countryCode: 'ee'})
+        const selector = container.querySelector('.country-select') as HTMLSelectElement
 
-    const selectElement = screen.getByLabelText('Vali riik') as HTMLSelectElement
-    fireEvent.change(selectElement, {target: {value: 'fi'}})
+        await fireEvent.change(selector, {target: {value: 'fi'}})
 
-    // expect(pricesStore.update).toHaveBeenCalledWith(expect.objectContaining({selectedCountry: 'fi'}))
+        expect(selector.value).toBe('fi');
+    });
 });

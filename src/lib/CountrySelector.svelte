@@ -1,5 +1,11 @@
 <script lang="ts">
-    const countryCodes = ['ee', 'lv', 'lt', 'fi']
+    const countryCodeToName: Record<string, string> = {
+        ee: 'Eesti',
+        lv: 'Läti',
+        lt: 'Leedu',
+        fi: 'Soome'
+    }
+    const countryCodes = Object.keys(countryCodeToName)
     export let countryCode = countryCodes[0]
 </script>
 
@@ -7,7 +13,7 @@
     <label class="country-label" for="countryCode">Vali riik</label>
     <select class="country-select" id="countryCode" bind:value={countryCode}>
         {#each countryCodes as countryCode}
-            <option value={countryCode}>{countryCode.toUpperCase()}</option>
+            <option class="country-option" value={countryCode}>{countryCodeToName[countryCode]}</option>
         {/each}
     </select>
 </div>
@@ -23,31 +29,22 @@
     .country-label {
         font-size: 1.7em;
         font-weight: 600;
-
     }
 
     .country-select {
         cursor: pointer;
-        padding: 0.5em 0.8em;
+        padding: 0.3em 0.6em;
         font-size: 1.7em;
         font-weight: 600;
         color: #FFF9FA;
-        background-color:#664D51;
+        background-color: #664D51;
         border: none;
         border-radius: 7px;
         outline: none;
-        transition: background-color 0.3s ease;
     }
 
     .country-select:focus {
-        background-color: #664D51;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    }
-
-    .country-select option {
-        background-color: #664D51;
-        color: #FFF9FA;
-        transition: background-color 0.3s ease;
     }
 
 </style>

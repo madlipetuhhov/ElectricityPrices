@@ -1,7 +1,8 @@
-import {beforeEach, describe, expect, it, vi} from "vitest";
-import {act, render, waitFor} from "@testing-library/svelte";
-import DataFetcher from "../lib/DataFetcher.svelte";
-import type {EleringPrices} from "../utils/types";
+import {beforeEach, describe, expect, it, vi} from "vitest"
+import {act, render, waitFor} from "@testing-library/svelte"
+import DataFetcher from "../lib/DataFetcher.svelte"
+import type {EleringPrices} from "../utils/types"
+import {tick} from "svelte"
 
 describe('DataFetcher', async () => {
     beforeEach(() => {
@@ -34,7 +35,7 @@ describe('DataFetcher', async () => {
 
         await act(() => fetchSpy)
 
-        expect(fetchSpy).toHaveBeenCalledWith(`/api/nps/price?start=2024-11-04T22:00:00.000Z&end=${date}T21:59:00.000Z&country=ee`);
+        expect(fetchSpy).toHaveBeenCalledWith(`/api/nps/price?start=2024-11-04T22:00:00.000Z&end=${date}T21:59:00.000Z&country=ee`)
     })
 
     it('checks if data is fetched from correct URL (summer time - EEST, UTC+3)', async () => {
@@ -44,7 +45,7 @@ describe('DataFetcher', async () => {
         } as Response)
 
         const date = '2024-05-05'
-        render(DataFetcher, {date, countryCode: 'ee'})
+        const container = render(DataFetcher, {date, countryCode: 'ee'})
 
         await act(() => fetchSpy)
 
@@ -52,6 +53,23 @@ describe('DataFetcher', async () => {
             `/api/nps/price?start=2024-05-04T21:00:00.000Z&end=${date}T20:59:00.000Z&country=ee`
         )
     });
+
+    it('checks if data is correct', async () => {
+        const fetchSpy = vi.spyOn(window, 'fetch').mockResolvedValueOnce({
+            ok: true,
+            json: async () => testResponseData
+        } as Response)
+
+        const date = '2024-11-05'
+        const {container} = render(DataFetcher, {date, countryCode: 'ee'})
+
+        await act(() => fetchSpy)
+        await tick()
+
+        expect(container.querySelectorAll('.bar')).to.have.length(2)
+
+    })
+
 })
 
 //         it('should fetch data from external API and pass it as a prop to the component', async () => {
