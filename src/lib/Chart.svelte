@@ -9,7 +9,7 @@
 <main>
     <div class="chart-wrapper">
         <div class="y-axis-label">Hind (s/kWh)</div>
-        <div class="chart-container">
+        <div class="chart">
             {#each formattedTimeAndPrice as {time, price}}
                 <div class="bar" style="height: {price}em;">
                     <div class="bar-price">{price} s/kWh</div>
@@ -24,13 +24,13 @@
 <style>
 
 
-    .chart-container {
+    .chart {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
         width: 100%;
-        border-left: 0.2em solid #664D51;
-        border-bottom: 0.2em solid #664D51;
+        border-left: 0.1em solid #B3868E;
+        border-bottom: 0.1em solid #B3868E;
         box-sizing: border-box;
     }
 
@@ -39,7 +39,7 @@
         background-color: #E6ADB7;
         text-align: center;
         position: relative;
-        margin: 0.5em 0.5em 0 0.5em;
+        margin: 0.2em 0.6em 0 0.6em;
         border-top-left-radius: 7px;
         border-top-right-radius: 7px;
         transition: background-color 0.3s ease, height 0.3s ease;
@@ -66,6 +66,7 @@
         transform: translateX(-50%);
         font-size: 1.3em;
         font-weight: 600;
+        line-height: 1.2;
         text-align: center;
         opacity: 0;
         transition: opacity 0.3s ease;

@@ -21,7 +21,7 @@
     }
 
     .country-label {
-        font-size: 1.5em;
+        font-size: 1.7em;
         font-weight: 600;
 
     }
@@ -29,7 +29,7 @@
     .country-select {
         cursor: pointer;
         padding: 0.5em 0.8em;
-        font-size: 1.4em;
+        font-size: 1.7em;
         font-weight: 600;
         color: #FFF9FA;
         background-color:#664D51;

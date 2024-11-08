@@ -3,27 +3,45 @@
     import DataFetcher from "./lib/DataFetcher.svelte";
     import CountrySelector from "./lib/CountrySelector.svelte";
     import Chart from "./lib/Chart.svelte";
-    import DataMapper from "./lib/DataMapper.svelte";
+    import {formatTimeAndPrice} from "./utils/dataFormatter";
 
     let countryCode = 'ee'
     let date = new Date().toISOString().replace(/T.*/, '')
     export let prices: { timestamp: number, price: number }[] = []
-    export let formattedTimeAndPrice: { time: string, price: number }[] = []
+    export let formattedTimeAndPrice: { time: string, price: string }[] = []
 
+    $: formattedTimeAndPrice = formatTimeAndPrice(prices);
 </script>
 
-<main>
-    <input type="date" bind:value={date}/>
-    <CountrySelector bind:countryCode/>
-    <DataFetcher {date} {countryCode} bind:prices/>
-    <DataMapper {prices} bind:formattedTimeAndPrice/>
-    <Chart {formattedTimeAndPrice}/>
-
+<div class="container">
+    <header>
+        <DataFetcher {date} {countryCode} bind:prices/>
+        <h1 class="main-header">Elektri hinnad</h1>
+    </header>
+    <div class="date-country-selection">
+        <input type="date" bind:value={date}/>
+        <CountrySelector bind:countryCode/>
+    </div>
+    <div class="chart">
+        <Chart {formattedTimeAndPrice}/>
+    </div>
     <!--    <pre>{JSON.stringify(prices, null, 2)}</pre>-->
-</main>
+</div>
 
 <style>
-    main {
+    .main-header {
+        font-weight: 600;
+        font-size: 5em;
+    }
+
+    .date-country-selection {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 6rem;
+    }
+
+    .container {
         display: flex;
         flex-direction: column;
         justify-content: center;

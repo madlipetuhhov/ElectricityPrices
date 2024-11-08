@@ -1,7 +1,7 @@
 import {beforeEach, describe, expect, it, vi} from "vitest";
 import {render, waitFor} from "@testing-library/svelte";
 import DataFetcher from "../lib/DataFetcher.svelte";
-import type {EleringPrices} from "../lib/types";
+import type {EleringPrices} from "../utils/types";
 
 describe('DataFetcher', async () => {
     beforeEach(() => {
@@ -22,13 +22,16 @@ describe('DataFetcher', async () => {
         } as EleringPrices,
     }
 
-    it('should fetch data from external API and pass it as a prop to the component', async () => {
+    // TODO: check that data is correct
+    // TODO: summer time
+
+    it('checks if data is fetched from correct URL (winter time)', async () => {
         const fetchSpy = vi.spyOn(window, 'fetch').mockResolvedValueOnce({
             ok: true,
             json: async () => testResponseData
         } as Response)
 
-        const date = '2024-11-06'; // TODO: summer time
+        const date = '2024-11-06';
         render(DataFetcher, {date, countryCode: 'ee'})
 
         await waitFor(() => {
@@ -36,8 +39,45 @@ describe('DataFetcher', async () => {
                 `https://dashboard.elering.ee/api/nps/price?start=2024-11-05T22:00:00.000Z&end=${date}T23:59:59.999Z`
             )
 
-            // TODO: check that data is correct
         });
     })
+
+    it('checks if data is fetched from correct URL (summer time)', async () => {
+        const fetchSpy = vi.spyOn(window, 'fetch').mockResolvedValueOnce({
+            ok: true,
+            json: async () => testResponseData
+        } as Response)
+
+        const date = '2024-11-06';
+        render(DataFetcher, {date, countryCode: 'ee'})
+
+        await waitFor(() => {
+            expect(fetchSpy).toHaveBeenCalledWith(
+                `https://dashboard.elering.ee/api/nps/price?start=2024-11-05T22:00:00.000Z&end=${date}T23:59:59.999Z`
+            )
+        });
+    })
+
+//         it('should fetch data from external API and pass it as a prop to the component', async () => {
+//         const fetchSpy = vi.spyOn(window, 'fetch').mockReturnValue(Promise.resolve({
+//             json: () => Promise.resolve(testResponseData)
+//         } as Response))
+//
+//         const date = '2024-11-06';
+//         const countryCode = 'ee';
+//
+//         // Act (state 1)
+//         const {container} = render(ElectricityPrices, {date, countryCode});
+//
+//         expect(fetchSpy).toHaveBeenCalledWith(
+//             'https://dashboard.elering.ee/api/nps/price?start=2024-11-05T22:00:00.000Z&end=2024-11-06T21:59:00.000Z'
+//         );
+//
+//         await act(() => fetchSpy) //svelte jargmine samm
+//         await tick()
+//
+//         // assert that data was received/rendered
+//         expect(container.querySelectorAll('.bar')).to.have.length(2)
+//     });
 
 })
