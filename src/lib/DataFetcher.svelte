@@ -7,6 +7,8 @@
 
     let allPrices: EleringPrices = {}
 
+    // todo: teha ts failiks, et ei oleks Svelte component
+    // todo: peaks olema allPrices-iks ka mapitud, sobivam andme struktuur (vist ongi country code)
     export function getFetchUrl(date: string, countryCode: string) {
         const startTime = new Date(date + 'T00:00').toISOString();
         const endTime = new Date(date + 'T23:59').toISOString();

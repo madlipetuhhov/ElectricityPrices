@@ -87,10 +87,6 @@
         transform: translateY(-50%);
         font-size: 1.3em;
         font-weight: 600;
-        color: #FFF9FA;
-        text-align: center;
-        background-color: #664D51;
-        padding: 0.5em 0.8em;
         border-radius: 7px;
     }
 

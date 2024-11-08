@@ -14,8 +14,10 @@
     $: formattedTimeAndPrice = formatTimeAndPrice(prices);
 </script>
 
+<!--todo: add loading view-->
 <main class="container">
     <header>
+        <!--todo: DataFetcher viia ts failiks, sest ei renderda-->
         <DataFetcher {date} {countryCode} bind:prices/>
         <h1 class="main-header">Elektri hinnad</h1>
     </header>
@@ -26,7 +28,6 @@
     <div class="chart">
         <Chart {formattedTimeAndPrice}/>
     </div>
-    <!--    <pre>{JSON.stringify(prices, null, 2)}</pre>-->
 </main>
 
 <style>
@@ -39,7 +40,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 7rem;
+        gap: 5rem;
         background-color: #E6ADB7;
         border-radius: 7px;
         padding-left: 2em;

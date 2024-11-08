@@ -1,13 +1,39 @@
 <script lang="ts">
     export let date: string
+    let currentDate = new Date
+    let nextDaySelected = false
+
+    // todo: ei toota
+    function isNextDateButtonDisabled() {
+        const currentHour = currentDate.getHours()
+        return currentHour < 13 || nextDaySelected
+    }
+
+    function prevDate() {
+        currentDate.setDate(currentDate.getDate() - 1)
+        date = currentDate.toISOString().replace(/T.*/, '')
+    }
+
+    function nextDate() {
+        currentDate.setDate(currentDate.getDate() + 1)
+        date = currentDate.toISOString().replace(/T.*/, '')
+        nextDaySelected = true
+    }
 </script>
 
 <div class="date-container">
-    <button class="prev-button" aria-label="Previous">
+    <button
+            class="prev-button"
+            aria-label="Previous"
+            on:click={prevDate}>
         <i class="mi mi-chevron-left"></i>
     </button>
     <input class="date-input" type="date" bind:value={date}/>
-    <button class="next-button" aria-label="Next">
+    <button
+            class="next-button {isNextDateButtonDisabled() ? 'disabled' : ''}"
+            aria-label="Next"
+            on:click={nextDate}
+            disabled={isNextDateButtonDisabled()}>
         <i class="mi mi-chevron-right"></i>
     </button>
 </div>
@@ -56,5 +82,10 @@
         outline: none;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
         background-color: #CC9AA2;
+    }
+
+    .disabled {
+        background-color: #808080;
+        cursor: not-allowed;
     }
 </style>

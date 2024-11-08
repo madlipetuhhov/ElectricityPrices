@@ -10,7 +10,6 @@
 </script>
 
 <div class="country-container">
-    <label class="country-label" for="countryCode">Vali riik</label>
     <select class="country-select" id="countryCode" bind:value={countryCode}>
         {#each countryCodes as countryCode}
             <option class="country-option" value={countryCode}>{countryCodeToName[countryCode]}</option>
@@ -24,11 +23,6 @@
         justify-content: space-between;
         align-items: center;
         gap: 1em;
-    }
-
-    .country-label {
-        font-size: 1.6em;
-        font-weight: 600;
     }
 
     .country-select {

@@ -3,8 +3,8 @@ import CountrySelector from "../lib/CountrySelector.svelte";
 import {fireEvent, render} from "@testing-library/svelte";
 
 describe('CountrySelector', () => {
-    it('should default to the first countryCode when no value is passed', () => {
-        const { container } = render(CountrySelector);
+    it('default countryCode should be ee when no countryCode passed', () => {
+        const { container } = render(CountrySelector)
         expect(container.querySelector('select')!.value).toEqual('ee')
     });
 
