@@ -23,7 +23,7 @@
 
     .prev-button, .next-button {
         cursor: pointer;
-        padding: 0.6em 0.7em;
+        padding: 0.55em 0.7em;
         color: #FFF9FA;
         background-color: #664D51;
         border: none;
@@ -37,7 +37,7 @@
     }
 
     .prev-button:hover, .next-button:hover, .date-input:hover {
-        background-color: #CC9AA2;
+        background-color: #806066;
     }
 
     .date-input {

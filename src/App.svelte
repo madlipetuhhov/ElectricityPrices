@@ -40,6 +40,10 @@
         justify-content: space-between;
         align-items: center;
         gap: 7rem;
+        background-color: #E6ADB7;
+        border-radius: 7px;
+        padding-left: 2em;
+        padding-right: 2em;
     }
 
     .container {

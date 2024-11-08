@@ -6,21 +6,24 @@
 </script>
 <!--todo: negatiivsed hinnad-->
 
-<main>
-    <div class="chart-wrapper">
-        <div class="y-axis-label">Hind (s/kWh)</div>
-        <div class="chart">
-            {#each formattedTimeAndPrice as {time, price}}
-                <div class="bar" style="height: {price}em">
-                    <div class="bar-price">{price} s/kWh</div>
-                    <div class="bar-label">{time}</div>
-                </div>
-            {/each}
-        </div>
+<div class="chart-container">
+    <div class="y-axis-label">Hind (s/kWh)</div>
+    <div class="chart">
+        {#each formattedTimeAndPrice as {time, price}}
+            <div class="bar" style="height: {price}em">
+                <div class="bar-price">{price} s/kWh</div>
+                <div class="bar-label">{time}</div>
+            </div>
+        {/each}
     </div>
-</main>
+</div>
 
 <style>
+    .chart-container {
+        position: relative;
+        margin-top: 15em;
+    }
+
     .chart {
         display: flex;
         justify-content: space-between;
@@ -75,11 +78,6 @@
 
     .bar:hover .bar-price {
         opacity: 1;
-    }
-
-    .chart-wrapper {
-        position: relative;
-        margin-top: 6em;
     }
 
     .y-axis-label {

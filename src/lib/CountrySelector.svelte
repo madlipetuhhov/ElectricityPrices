@@ -44,7 +44,7 @@
     }
 
     .country-select:hover {
-        background-color: #CC9AA2;
+        background-color: #806066;
     }
 
     .country-select:focus {
