@@ -1,4 +1,4 @@
-import {beforeEach, describe, expect, it, vi} from "vitest"
+import {beforeEach, describe, expect, it, test, vi} from "vitest"
 import {act, render} from "@testing-library/svelte"
 import type {Country, EleringPrices, ISODate} from "../utils/types"
 import {tick} from "svelte"
@@ -50,15 +50,24 @@ describe('getFetchUrl', () => {
 })
 
 describe('fetchData', () => {
-    it('should throw an error when the response is unsuccessful', async () => {
-       const fetchSpy =  vi.spyOn(window, 'fetch').mockResolvedValueOnce({
+    it('should throw an error when fetch was unsuccessful', async () => {
+        vi.spyOn(window, 'fetch').mockResolvedValueOnce({
             ok: false,
-            json: async () => ({ success: false })
+            json: async () => testResponseData
         } as Response)
 
-        await tick()
+        const date: ISODate = '2024-11-05'
+        await expect(fetchData(date)).rejects.toThrow('Failed to fetch data')
+    })
 
-        await expect(fetchSpy).toThrowError('API returned an unsuccessful response')
+    it('should throw an error when the response is unsuccessful', async () => {
+        vi.spyOn(window, 'fetch').mockResolvedValueOnce({
+            ok: true,
+            json: async () => ({success: false})
+        } as Response)
+
+        const date: ISODate = '2024-11-05'
+        await expect(fetchData(date)).rejects.toThrow('API returned an unsuccessful response')
     })
 
     it('should return correct data', async () => {
@@ -79,14 +88,13 @@ describe('fetchData', () => {
 describe('getPricesForCountry', () => {
     it('should return prices and times for specific country', () => {
         const countryCode: Country = 'ee'
-
         const result = getPricesForCountry(testResponseData.data, countryCode)
-
         expect(result).toEqual(testResponseData.data[countryCode])
     })
 
-    it('should call fetch with correct URL', async () => {
-
+    it('should throw an error when country code does not exist', async () => {
+        const countryCode: any = 'fr'
+        expect(() => getPricesForCountry(testResponseData.data, countryCode)).toThrow('Country code not found')
     })
 })
 

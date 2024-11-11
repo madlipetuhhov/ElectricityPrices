@@ -20,5 +20,6 @@ export async function fetchData(date: ISODate): Promise<EleringPrices> {
 }
 
 export function getPricesForCountry(allPrices: EleringPrices, countryCode: Country): PriceWithTime[] {
+    if (!allPrices[countryCode]) throw new Error('Country code not found')
     return allPrices[countryCode]
 }
