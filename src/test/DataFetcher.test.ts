@@ -34,9 +34,33 @@ describe('getFetchUrl', () => {
         const result = getFetchUrl(date)
         expect(result).toBe(`/api/nps/price?start=2024-05-04T21:00:00.000Z&end=${date}T20:59:00.000Z`)
     })
+
+    it('should handle leap year correctly', () => {
+        const date: ISODate = '2024-03-01'
+        const result = getFetchUrl(date)
+        expect(result).toBe(`/api/nps/price?start=2024-02-29T22:00:00.000Z&end=${date}T21:59:00.000Z`)
+    })
+
+    it('should generate correct URL for the first day of the year', () => {
+        const date: ISODate = '2024-01-01'
+        const result = getFetchUrl(date)
+        expect(result).toBe(`/api/nps/price?start=2023-12-31T22:00:00.000Z&end=${date}T21:59:00.000Z`)
+    })
+
 })
 
 describe('fetchData', () => {
+    it('should throw an error when the response is unsuccessful', async () => {
+       const fetchSpy =  vi.spyOn(window, 'fetch').mockResolvedValueOnce({
+            ok: false,
+            json: async () => ({ success: false })
+        } as Response)
+
+        await tick()
+
+        await expect(fetchSpy).toThrowError('API returned an unsuccessful response')
+    })
+
     it('should return correct data', async () => {
         vi.spyOn(window, 'fetch').mockResolvedValueOnce({
             ok: true,
@@ -59,6 +83,10 @@ describe('getPricesForCountry', () => {
         const result = getPricesForCountry(testResponseData.data, countryCode)
 
         expect(result).toEqual(testResponseData.data[countryCode])
+    })
+
+    it('should call fetch with correct URL', async () => {
+
     })
 })
 

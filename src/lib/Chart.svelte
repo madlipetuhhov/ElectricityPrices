@@ -8,6 +8,7 @@
     <div class="y-axis-label">Hind (s/kWh)</div>
     <div class="chart">
         {#each formattedTimeAndPrice as {time, price}}
+            <!--todo: protsent korguseks price / dailyMax * 100}%"> ja fix korgus chartile-->
             <div class="bar" style="height: {price}em">
                 <div class="bar-price">{price} s/kWh</div>
                 <div class="bar-label">{time}</div>
