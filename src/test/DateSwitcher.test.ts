@@ -12,7 +12,7 @@ describe('DateSwitcher', () => {
 
     it('should update date when clicking "Previous" button', async () => {
         const {container} = render(DateSwitcher, {props: {date: mockDate}})
-        const prevButton = container.querySelector('button[aria-label="Previous"]')!
+        const prevButton = container.querySelector('.prev-button')!
 
         await fireEvent.click(prevButton)
 
@@ -27,7 +27,7 @@ describe('DateSwitcher', () => {
 
     it('should update date when clicking "Next" button', async () => {
         const {container} = render(DateSwitcher, {props: {date: mockDate}})
-        const nextButton = container.querySelector('button[aria-label="Next"]')!
+        const nextButton = container.querySelector('.next-button')!
 
         await fireEvent.click(nextButton)
 

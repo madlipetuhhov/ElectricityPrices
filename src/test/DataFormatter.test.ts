@@ -1,5 +1,5 @@
 import {describe, it, expect} from "vitest";
-import {convertEuroMWhToCentKWh, addVatToPrice, formatTimeAndPrice} from "../utils/dataFormatter";
+import {convertEuroMWhToCentKWh, addVatToPrice, formatTimeAndPrice} from "../utils/DataFormatter";
 import type {Price} from "../utils/types";
 
 describe('convertEuroMWhToCentKWh', () => {

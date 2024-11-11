@@ -3,7 +3,7 @@
     import DataFetcher from "./lib/DataFetcher.svelte";
     import CountrySelector from "./lib/CountrySelector.svelte";
     import Chart from "./lib/Chart.svelte";
-    import {formatTimeAndPrice} from "./utils/dataFormatter";
+    import {formatTimeAndPrice} from "./utils/DataFormatter";
     import DateSwitcher from "./lib/DateSwitcher.svelte";
 
     let countryCode = 'ee'

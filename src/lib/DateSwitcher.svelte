@@ -3,6 +3,8 @@
     let currentDate = new Date
     let nextDaySelected = false
 
+    $: currentDate = new Date(date)
+
     // todo: ei toota
     function isNextDateButtonDisabled() {
         const currentHour = currentDate.getHours()
