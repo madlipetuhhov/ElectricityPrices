@@ -1,25 +1,36 @@
 <script lang="ts">
-    export let date: string
-    let currentDate = new Date
+    import type {ISODate} from "../utils/types";
+
+    export let date: ISODate
     let nextDaySelected = false
 
-    $: currentDate = new Date(date)
+    // The DayAhead prices are available around 13:00 CET/CEST.
+    function isNextDateButtonDisabled(): boolean {
+        const today = new Date()
+        const tomorrow = new Date()
 
-    // todo: ei toota
-    function isNextDateButtonDisabled() {
-        const currentHour = currentDate.getHours()
-        return currentHour < 13 || nextDaySelected
+        // kas valitud on tomorrow  -yes, disable.
+        // kell on tana vahem 13:00
+        // kell 10:00 hommikul (disabled): kell < 13 && date == tomorrow
+        // kell 14:00: ei ole disabled
+        tomorrow.setDate(today.getDate() + 1)
+        console.log('homme ' + tomorrow.toISOString().split('T')[0] as ISODate, 'kasutaja valitud '+ date)
+        return nextDaySelected
     }
 
     function prevDate() {
-        currentDate.setDate(currentDate.getDate() - 1)
-        date = currentDate.toISOString().replace(/T.*/, '')
+        const newDate = new Date(date)
+        console.log('prevDate new date ' + newDate)
+        newDate.setDate(newDate.getDate() - 1)
+        date = newDate.toISOString().replace(/T.*/, '') as ISODate
     }
 
     function nextDate() {
-        currentDate.setDate(currentDate.getDate() + 1)
-        date = currentDate.toISOString().replace(/T.*/, '')
-        nextDaySelected = true
+        const newDate = new Date(date)
+        console.log('nextDate new date ' + newDate)
+        newDate.setDate(newDate.getDate() + 1)
+        date = newDate.toISOString().replace(/T.*/, '') as ISODate
+
     }
 </script>
 
@@ -32,9 +43,10 @@
     </button>
     <input class="date-input" type="date" bind:value={date}/>
     <button
-            class="next-button {isNextDateButtonDisabled() ? 'disabled' : ''}"
+            class="next-button"
             aria-label="Next"
             on:click={nextDate}
+            class:disabled={isNextDateButtonDisabled()}
             disabled={isNextDateButtonDisabled()}>
         <i class="mi mi-chevron-right"></i>
     </button>

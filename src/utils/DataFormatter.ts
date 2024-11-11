@@ -1,6 +1,5 @@
 import type {PriceWithTime, FormattedTimeAndPrice} from './types';
 
-
 export function convertEuroMWhToCentKWh(priceInEuroMWh: number): number {
     return (priceInEuroMWh * 100) / 1000
 }

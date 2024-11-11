@@ -10,7 +10,7 @@
     export let formattedTimeAndPrice: FormattedTimeAndPrice[] = []
 
     let countryCode: Country = 'ee'
-    let date = new Date().toISOString().replace(/T.*/, '') as ISODate
+    let date = new Date().toISOString().split('T')[0] as ISODate
     let loadedPrices: EleringPrices | undefined
 
     $: fetchData(date).then(r => loadedPrices = r)
