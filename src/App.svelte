@@ -1,24 +1,30 @@
 <script lang="ts">
-
-    import DataFetcher from "./lib/DataFetcher.svelte";
     import CountrySelector from "./lib/CountrySelector.svelte";
     import Chart from "./lib/Chart.svelte";
     import {formatTimeAndPrice} from "./utils/DataFormatter";
     import DateSwitcher from "./lib/DateSwitcher.svelte";
+    import {fetchData, getPricesForCountry} from "./utils/DataFetcher";
+    import type {Country, EleringPrices, FormattedTimeAndPrice, ISODate, PriceWithTime} from "./utils/types";
 
-    let countryCode = 'ee'
-    let date = new Date().toISOString().replace(/T.*/, '')
-    export let prices: { timestamp: number, price: number }[] = []
-    export let formattedTimeAndPrice: { time: string, price: string }[] = []
+    export let prices: PriceWithTime[] = []
+    export let formattedTimeAndPrice: FormattedTimeAndPrice[] = []
 
-    $: formattedTimeAndPrice = formatTimeAndPrice(prices);
+    let countryCode: Country = 'ee'
+    let date = new Date().toISOString().replace(/T.*/, '') as ISODate
+    let loadedPrices: EleringPrices | undefined
+
+    $: fetchData(date).then(r => loadedPrices = r)
+    $: {
+        if (loadedPrices) prices = getPricesForCountry(loadedPrices, countryCode)
+    }
+    $: formattedTimeAndPrice = formatTimeAndPrice(prices)
 </script>
 
-<!--todo: add loading view-->
 <main class="container">
+    {#if !loadedPrices}
+        <div class="loading">Loading...</div>
+    {/if}
     <header>
-        <!--todo: DataFetcher viia ts failiks, sest ei renderda-->
-        <DataFetcher {date} {countryCode} bind:prices/>
         <h1 class="main-header">Elektri hinnad</h1>
     </header>
     <div class="date-country-selection">

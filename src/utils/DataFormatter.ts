@@ -1,4 +1,4 @@
-import type {Price, FormattedTimeAndPrice} from './types';
+import type {PriceWithTime, FormattedTimeAndPrice} from './types';
 
 
 export function convertEuroMWhToCentKWh(priceInEuroMWh: number): number {
@@ -9,7 +9,7 @@ export function addVatToPrice(price: number): number {
     return price * 1.22
 }
 
-export function formatTimeAndPrice(prices: Price[]): FormattedTimeAndPrice[] {
+export function formatTimeAndPrice(prices: PriceWithTime[]): FormattedTimeAndPrice[] {
     if (!prices || prices.length === 0) {
         return [];
     }

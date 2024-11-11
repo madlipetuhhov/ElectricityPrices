@@ -1,6 +1,6 @@
 import {describe, it, expect} from "vitest";
 import {convertEuroMWhToCentKWh, addVatToPrice, formatTimeAndPrice} from "../utils/DataFormatter";
-import type {Price} from "../utils/types";
+import type {PriceWithTime} from "../utils/types";
 
 describe('convertEuroMWhToCentKWh', () => {
     it('should convert EUR/MWh to cent/kWh correctly', () => {
@@ -61,7 +61,7 @@ describe('addVatToPrice', () => {
 
     describe('formatTimeAndPrice', () => {
         it('should format time and price correctly', () => {
-            const prices: Price[] = [
+            const prices: PriceWithTime[] = [
                 {timestamp: 1730844000, price: 74.83},
                 {timestamp: 1730847600, price: -45},
                 {timestamp: 1730851200, price: 0},
@@ -80,7 +80,7 @@ describe('addVatToPrice', () => {
         });
 
         it('should handle empty list correctly', () => {
-            const prices: Price[] = []
+            const prices: PriceWithTime[] = []
 
             const result = formatTimeAndPrice(prices)
 
@@ -88,7 +88,7 @@ describe('addVatToPrice', () => {
         });
 
         it('should handle one price in list correctly', () => {
-            const prices: Price[] = [{timestamp: 1730844000, price: 74.83}]
+            const prices: PriceWithTime[] = [{timestamp: 1730844000, price: 74.83}]
 
             const result = formatTimeAndPrice(prices)
 

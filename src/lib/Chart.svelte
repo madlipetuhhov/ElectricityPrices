@@ -1,7 +1,5 @@
 <script lang="ts">
     export let formattedTimeAndPrice: { time: string, price: string }[] = []
-    console.log(formattedTimeAndPrice)
-
 
 </script>
 <!--todo: negatiivsed hinnad-->

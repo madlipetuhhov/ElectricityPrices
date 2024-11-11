@@ -1,7 +1,6 @@
 import {beforeEach, describe, expect, it, vi} from "vitest"
 import {act, render, waitFor} from "@testing-library/svelte"
-import DataFetcher from "../lib/DataFetcher.svelte"
-import type {EleringPrices} from "../utils/types"
+import type {EleringPrices, ISODate} from "../utils/types"
 import {tick} from "svelte"
 
 describe('DataFetcher', async () => {
@@ -30,7 +29,7 @@ describe('DataFetcher', async () => {
             json: async () => testResponseData
         } as Response)
 
-        const date = '2024-11-05'
+        const date: ISODate = '2024-11-05'
         render(DataFetcher, {date, countryCode: 'ee'})
 
         await act(() => fetchSpy)

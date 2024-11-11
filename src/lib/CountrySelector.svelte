@@ -1,18 +1,14 @@
 <script lang="ts">
-    const countryCodeToName: Record<string, string> = {
-        ee: 'Eesti',
-        lv: 'Läti',
-        lt: 'Leedu',
-        fi: 'Soome'
-    }
-    const countryCodes = Object.keys(countryCodeToName)
+    import {countries, type Country} from "../utils/types";
+
+    const countryCodes = Object.keys(countries) as Country[]
     export let countryCode = countryCodes[0]
 </script>
 
 <div class="country-container">
     <select class="country-select" id="countryCode" bind:value={countryCode}>
         {#each countryCodes as countryCode}
-            <option class="country-option" value={countryCode}>{countryCodeToName[countryCode]}</option>
+            <option class="country-option" value={countryCode}>{countries[countryCode]}</option>
         {/each}
     </select>
 </div>
