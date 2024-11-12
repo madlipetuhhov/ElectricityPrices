@@ -7,7 +7,7 @@
     import type {Country, EleringPrices, FormattedTimeAndPrice, ISODate, TimeAndPrice} from "./utils/Types";
 
     export let prices: TimeAndPrice[]
-    export let formattedTimeAndPrices: FormattedTimeAndPrice[]
+    export let formattedTimesAndPrices: FormattedTimeAndPrice[]
 
     let countryCode: Country = 'ee'
     let date = new Date().toISOString().split('T')[0] as ISODate
@@ -17,7 +17,7 @@
     $: {
         if (loadedPrices) prices = getPricesForCountry(loadedPrices, countryCode)
     }
-    $: formattedTimeAndPrices = formatTimeAndPrice(prices)
+    $: formattedTimesAndPrices = formatTimeAndPrice(prices)
 </script>
 
 <main class="container">
@@ -25,14 +25,14 @@
         <div class="loading">Loading...</div>
     {/if}
     <header>
-        <h1 class="main-header">Elektri hinnad</h1>
+        <h1 class="main-header">Elektri börsihinnad</h1>
     </header>
     <div class="date-country-selection">
         <DateSwitcher bind:date/>
         <CountrySelector bind:countryCode/>
     </div>
-    <div class="chart">
-        <Chart {formattedTimeAndPrices}/>
+    <div class="bar-chart">
+        <Chart {formattedTimesAndPrices}/>
     </div>
 </main>
 
