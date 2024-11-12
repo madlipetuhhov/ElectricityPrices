@@ -1,6 +1,6 @@
 import {describe, expect, it} from "vitest";
 import type {FormattedTimeAndPrice} from "../utils/Types";
-import {calcDailyMaxPrice} from "../lib/Chart.svelte";
+import {calcDailyMaxPrice, calcDailyMinPrice} from "../lib/Chart.svelte";
 
 describe('Chart', () => {
     const testFormattedTimesAndPrices: FormattedTimeAndPrice[] = [
@@ -12,6 +12,11 @@ describe('Chart', () => {
     it('should calculate dailyMax price correctly', () => {
         const result = calcDailyMaxPrice(testFormattedTimesAndPrices)
         expect(result).toBe(12.12)
+    })
+
+    it('should calculate dailyMax price correctly', () => {
+        const result = calcDailyMinPrice(testFormattedTimesAndPrices)
+        expect(result).toBe(-5.55)
     })
 
 

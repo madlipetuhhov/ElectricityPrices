@@ -2,6 +2,10 @@
     export function calcDailyMaxPrice(formattedTimeAndPrices: FormattedTimeAndPrice[]): number {
         return Math.max(...formattedTimeAndPrices.map(i => i.price))
     }
+
+    export function calcDailyMinPrice(formattedTimeAndPrices: FormattedTimeAndPrice[]): number {
+        return Math.min(...formattedTimeAndPrices.map(i => i.price))
+    }
 </script>
 
 <script lang="ts">
@@ -11,27 +15,27 @@
     export let formattedTimesAndPrices: FormattedTimeAndPrice[]
 
     $: dailyMax = calcDailyMaxPrice(formattedTimesAndPrices)
+    $: dailyMin = calcDailyMinPrice(formattedTimesAndPrices)
 
     $: yAxisValues = [
         {value: dailyMax, label: `${Math.round(dailyMax)} s/kWh`},
         {value: 0.75 * dailyMax, label: `${Math.round(0.75 * dailyMax)} s/kWh`},
         {value: 0.5 * dailyMax, label: `${Math.round(0.5 * dailyMax)} s/kWh`},
         {value: 0.25 * dailyMax, label: `${Math.round(0.25 * dailyMax)} s/kWh`},
-        {value: 0, label: `0 s/kWh`}
+        {value: 0, label: `0 s/kWh`},
+        ...(dailyMin < 0 ? [
+            { value: 0.25 * dailyMin, label: `${Math.round(0.25 * dailyMin)} s/kWh` },
+        ] : [])
     ]
 </script>
 
 <div class="chart-container">
-
     <div class="y-axis-labels">
         {#each yAxisValues as {label}, i}
-            {#if i < yAxisValues.length - 1}
-                <div class="y-axis-line" style="top: {i * 25}%"></div>
-            {/if}
+            <div class="y-axis-line" style="top: {i * 25}%"></div>
             <div class="y-axis-label" style="top: {i * 25}%">{label}</div>
         {/each}
     </div>
-
     <div class="bar-chart">
         {#each formattedTimesAndPrices as {time, price}}
             <Bar {price} {time} {dailyMax}/>
@@ -50,8 +54,6 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        border-left: 0.1em solid #B3868E;
-        border-bottom: 0.1em solid #B3868E;
         box-sizing: border-box;
         height: 40vh;
     }

@@ -32,8 +32,9 @@
     }
 
     .bar.negative .label {
+        transform-origin: top;
         transform: translateX(-50%) scaleY(-1);
-        top: 2em;
+        top: calc(100% + 4em);
     }
 
     .bar:hover {
