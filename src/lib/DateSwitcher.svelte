@@ -14,20 +14,20 @@
         // kell 10:00 hommikul (disabled): kell < 13 && date == tomorrow
         // kell 14:00: ei ole disabled
         tomorrow.setDate(today.getDate() + 1)
-        console.log('homme ' + tomorrow.toISOString().split('T')[0] as ISODate, 'kasutaja valitud '+ date)
+        // console.log('homme ' + tomorrow.toISOString().split('T')[0] as ISODate, 'kasutaja valitud '+ date)
         return nextDaySelected
     }
 
     function prevDate() {
         const newDate = new Date(date)
-        console.log('prevDate new date ' + newDate)
+        // console.log('prevDate new date ' + newDate)
         newDate.setDate(newDate.getDate() - 1)
         date = newDate.toISOString().replace(/T.*/, '') as ISODate
     }
 
     function nextDate() {
         const newDate = new Date(date)
-        console.log('nextDate new date ' + newDate)
+        // console.log('nextDate new date ' + newDate)
         newDate.setDate(newDate.getDate() + 1)
         date = newDate.toISOString().replace(/T.*/, '') as ISODate
 

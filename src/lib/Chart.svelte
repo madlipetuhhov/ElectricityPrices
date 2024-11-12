@@ -4,10 +4,20 @@
     export let formattedTimeAndPrices: FormattedTimeAndPrice[]
 
     function getDailyMaxPrice(formattedTimeAndPrices: FormattedTimeAndPrice[]): number {
-        return Math.max(...formattedTimeAndPrices.map(i => +i.price))
+        return Math.max(...formattedTimeAndPrices.map(i => i.price))
     }
 
     $: dailyMax = getDailyMaxPrice(formattedTimeAndPrices)
+
+
+    $: yAxisValues = [
+        {value: dailyMax, label: `${Math.round(dailyMax)} s/kWh`},
+        {value: 0.75 * dailyMax, label: `${Math.round(0.75 * dailyMax)} s/kWh`},
+        {value: 0.5 * dailyMax, label: `${Math.round(0.5 * dailyMax)} s/kWh`},
+        {value: 0.25 * dailyMax, label: `${Math.round(0.25 * dailyMax)} s/kWh`},
+        {value: 0, label: `0 s/kWh`}
+    ]
+    $: console.log(dailyMax, yAxisValues)
 
 </script>
 <!--todo: negatiivsed hinnad-->
@@ -15,16 +25,10 @@
 <div class="chart-container">
 
     <div class="y-axis-labels">
-        <div class="y-axis-line" style="top: 0%;"></div>
-        <div class="y-axis-line" style="top: 25%;"></div>
-        <div class="y-axis-line" style="top: 50%;"></div>
-        <div class="y-axis-line" style="top: 75%;"></div>
-
-        <div class="y-axis-label" style="top: 0%;">{Math.round(dailyMax)} s/kWh</div>
-        <div class="y-axis-label" style="top: 25%;">{Math.round(0.75 * dailyMax)} s/kWh</div>
-        <div class="y-axis-label" style="top: 50%;">{Math.round(0.5 * dailyMax)} s/kWh</div>
-        <div class="y-axis-label" style="top: 75%;">{Math.round(0.25 * dailyMax)} s/kWh</div>
-        <div class="y-axis-label" style="top: 100%;">0 s/kWh</div>
+        {#each yAxisValues as {label}, i}
+            <div class="y-axis-line" style="top: {i * 25}%"></div>
+            <div class="y-axis-label" style="top: {i * 25}%">{label}</div>
+        {/each}
     </div>
 
     <div class="chart">
@@ -122,7 +126,7 @@
 
     .y-axis-label {
         position: absolute;
-        left: -5em;
+        left: -6em;
         transform: translateY(-50%);
         width: 100%;
         text-align: left;
