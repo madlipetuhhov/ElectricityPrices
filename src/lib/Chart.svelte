@@ -11,6 +11,7 @@
 <script lang="ts">
     import type {FormattedTimeAndPrice} from "../utils/Types"
     import Bar from "./Bar.svelte";
+    import {t} from "../i18n";
 
     export let formattedTimesAndPrices: FormattedTimeAndPrice[]
 
@@ -18,13 +19,13 @@
     $: dailyMin = calcDailyMinPrice(formattedTimesAndPrices)
 
     $: yAxisValues = [
-        {value: dailyMax, label: `${Math.round(dailyMax)} s/kWh`},
-        {value: 0.75 * dailyMax, label: `${Math.round(0.75 * dailyMax)} s/kWh`},
-        {value: 0.5 * dailyMax, label: `${Math.round(0.5 * dailyMax)} s/kWh`},
-        {value: 0.25 * dailyMax, label: `${Math.round(0.25 * dailyMax)} s/kWh`},
-        {value: 0, label: `0 s/kWh`},
+        {value: dailyMax, label: `${Math.round(dailyMax)} ${t.units.cent}/${t.units.kWh}`},
+        {value: 0.75 * dailyMax, label: `${Math.round(0.75 * dailyMax)} ${t.units.cent}/${t.units.kWh}`},
+        {value: 0.5 * dailyMax, label: `${Math.round(0.5 * dailyMax)} ${t.units.cent}/${t.units.kWh}`},
+        {value: 0.25 * dailyMax, label: `${Math.round(0.25 * dailyMax)} ${t.units.cent}/${t.units.kWh}`},
+        {value: 0, label: `0 ${t.units.cent}/${t.units.kWh}`},
         ...(dailyMin < 0 ? [
-            { value: 0.25 * dailyMin, label: `${Math.round(0.25 * dailyMin)} s/kWh` },
+            {value: 0.25 * dailyMin, label: `${Math.round(0.25 * dailyMin)} ${t.units.cent}/${t.units.kWh}`},
         ] : [])
     ]
 </script>

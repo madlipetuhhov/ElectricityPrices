@@ -5,6 +5,8 @@
     import DateSwitcher from "./lib/DateSwitcher.svelte";
     import {fetchData, getPricesForCountry} from "./utils/DataFetcher";
     import type {Country, EleringPrices, FormattedTimeAndPrice, ISODate, TimeAndPrice} from "./utils/Types";
+    import {t} from "./i18n";
+    import LangSwitcher from "./lib/LangSwitcher.svelte";
 
     export let prices: TimeAndPrice[]
     export let formattedTimesAndPrices: FormattedTimeAndPrice[]
@@ -25,9 +27,10 @@
         <div class="loading">Loading...</div>
     {/if}
     <header>
-        <h1 class="main-header">Elektri börsihinnad</h1>
+        <h1 class="main-header">{t.title}</h1>
     </header>
-    <div class="date-country-selection">
+    <div class="selector-container">
+        <LangSwitcher/>
         <DateSwitcher bind:date/>
         <CountrySelector bind:countryCode/>
     </div>
@@ -42,7 +45,7 @@
         font-size: 5em;
     }
 
-    .date-country-selection {
+    .selector-container {
         display: flex;
         justify-content: space-between;
         align-items: center;

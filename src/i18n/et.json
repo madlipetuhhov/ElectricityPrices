@@ -1,0 +1,13 @@
+{
+  "title": "Elektri hinnad 1",
+  "countries": {
+    "ee": "Eesti",
+    "lv": "Läti",
+    "lt": "Leedu",
+    "fi": "Soome"
+  },
+  "units": {
+    "cent": "s",
+    "kWh": "kWh"
+  }
+}

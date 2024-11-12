@@ -1,0 +1,13 @@
+{
+  "title": "Electricity prices 1",
+  "countries": {
+    "ee": "Estonia",
+    "lv": "Latvia",
+    "lt": "Lithuania",
+    "fi": "Finland"
+  },
+  "units": {
+    "cent": "c",
+    "kWh": "kWh"
+  }
+}

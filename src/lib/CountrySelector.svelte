@@ -1,5 +1,6 @@
 <script lang="ts">
     import {countries, type Country} from "../utils/Types";
+    import {t} from "../i18n";
 
     const countryCodes = Object.keys(countries) as Country[]
     export let countryCode = countryCodes[0]
@@ -8,7 +9,7 @@
 <div class="country-container">
     <select class="country-select" id="countryCode" bind:value={countryCode}>
         {#each countryCodes as countryCode}
-            <option class="country-option" value={countryCode}>{countries[countryCode]}</option>
+            <option class="country-option" value={countryCode}>{t.countries[countryCode]}</option>
         {/each}
     </select>
 </div>
