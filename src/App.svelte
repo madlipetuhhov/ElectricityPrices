@@ -4,10 +4,10 @@
     import {formatTimeAndPrice} from "./utils/DataFormatter";
     import DateSwitcher from "./lib/DateSwitcher.svelte";
     import {fetchData, getPricesForCountry} from "./utils/DataFetcher";
-    import type {Country, EleringPrices, FormattedTimeAndPrice, ISODate, PriceWithTime} from "./utils/types";
+    import type {Country, EleringPrices, FormattedTimeAndPrice, ISODate, TimeAndPrice} from "./utils/Types";
 
-    export let prices: PriceWithTime[] = []
-    export let formattedTimeAndPrice: FormattedTimeAndPrice[] = []
+    export let prices: TimeAndPrice[]
+    export let formattedTimeAndPrices: FormattedTimeAndPrice[]
 
     let countryCode: Country = 'ee'
     let date = new Date().toISOString().split('T')[0] as ISODate
@@ -17,7 +17,7 @@
     $: {
         if (loadedPrices) prices = getPricesForCountry(loadedPrices, countryCode)
     }
-    $: formattedTimeAndPrice = formatTimeAndPrice(prices)
+    $: formattedTimeAndPrices = formatTimeAndPrice(prices)
 </script>
 
 <main class="container">
@@ -32,7 +32,7 @@
         <CountrySelector bind:countryCode/>
     </div>
     <div class="chart">
-        <Chart {formattedTimeAndPrice}/>
+        <Chart {formattedTimeAndPrices}/>
     </div>
 </main>
 
@@ -49,8 +49,8 @@
         gap: 5rem;
         background-color: #E6ADB7;
         border-radius: 7px;
-        padding-left: 2em;
-        padding-right: 2em;
+        padding-left: 2.5em;
+        padding-right: 2.5em;
     }
 
     .container {

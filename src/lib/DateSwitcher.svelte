@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {ISODate} from "../utils/types";
+    import type {ISODate} from "../utils/Types";
 
     export let date: ISODate
     let nextDaySelected = false

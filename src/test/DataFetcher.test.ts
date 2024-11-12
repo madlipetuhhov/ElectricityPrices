@@ -1,6 +1,6 @@
 import {beforeEach, describe, expect, it, test, vi} from "vitest"
 import {act, render} from "@testing-library/svelte"
-import type {Country, EleringPrices, ISODate} from "../utils/types"
+import type {Country, EleringPrices, ISODate} from "../utils/Types"
 import {tick} from "svelte"
 import {fetchData, getFetchUrl, getPricesForCountry} from "../utils/DataFetcher"
 

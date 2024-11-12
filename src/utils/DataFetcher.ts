@@ -1,4 +1,4 @@
-import type {Country, EleringPrices, ISODate, PriceWithTime} from "./types";
+import type {Country, EleringPrices, ISODate, TimeAndPrice} from "./Types";
 
 export function getFetchUrl(date: ISODate) {
     const startTime = new Date(date + 'T00:00').toISOString()
@@ -19,7 +19,7 @@ export async function fetchData(date: ISODate): Promise<EleringPrices> {
     }
 }
 
-export function getPricesForCountry(allPrices: EleringPrices, countryCode: Country): PriceWithTime[] {
+export function getPricesForCountry(allPrices: EleringPrices, countryCode: Country): TimeAndPrice[] {
     if (!allPrices[countryCode]) throw new Error('Country code not found')
     return allPrices[countryCode]
 }

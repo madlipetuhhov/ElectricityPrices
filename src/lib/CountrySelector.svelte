@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {countries, type Country} from "../utils/types";
+    import {countries, type Country} from "../utils/Types";
 
     const countryCodes = Object.keys(countries) as Country[]
     export let countryCode = countryCodes[0]

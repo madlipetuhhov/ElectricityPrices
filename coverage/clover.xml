@@ -130,7 +130,7 @@
         <line num="27" count="2" type="stmt"/>
         <line num="28" count="2" type="stmt"/>
       </file>
-      <file name="types.ts" path="/home/vali-it/electricity-project/src/utils/types.ts">
+      <file name="Types.ts" path="/home/vali-it/electricity-project/src/utils/Types.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>

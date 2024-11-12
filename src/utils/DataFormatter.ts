@@ -1,4 +1,4 @@
-import type {PriceWithTime, FormattedTimeAndPrice} from './types';
+import type {TimeAndPrice, FormattedTimeAndPrice} from './Types';
 
 export function convertEuroMWhToCentKWh(priceInEuroMWh: number): number {
     return (priceInEuroMWh * 100) / 1000
@@ -8,7 +8,7 @@ export function addVatToPrice(price: number): number {
     return price * 1.22
 }
 
-export function formatTimeAndPrice(prices: PriceWithTime[]): FormattedTimeAndPrice[] {
+export function formatTimeAndPrice(prices: TimeAndPrice[]): FormattedTimeAndPrice[] {
     if (!prices || prices.length === 0) {
         return [];
     }
@@ -21,7 +21,8 @@ export function formatTimeAndPrice(prices: PriceWithTime[]): FormattedTimeAndPri
 
         const convertedPrice = convertEuroMWhToCentKWh(price)
         const convertedPriceWithVat = addVatToPrice(convertedPrice)
+        const roundedPrice = Math.round(convertedPriceWithVat * 100) / 100
 
-        return {time, price: convertedPriceWithVat.toFixed(2)}
+        return {time, price: roundedPrice}
     })
 }

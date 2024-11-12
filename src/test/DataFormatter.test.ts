@@ -1,6 +1,6 @@
 import {describe, it, expect} from "vitest";
 import {convertEuroMWhToCentKWh, addVatToPrice, formatTimeAndPrice} from "../utils/DataFormatter";
-import type {PriceWithTime} from "../utils/types";
+import type {TimeAndPrice} from "../utils/Types";
 
 describe('convertEuroMWhToCentKWh', () => {
     it('should convert EUR/MWh to cent/kWh correctly', () => {
@@ -61,7 +61,7 @@ describe('addVatToPrice', () => {
 
     describe('formatTimeAndPrice', () => {
         it('should format time and price correctly', () => {
-            const prices: PriceWithTime[] = [
+            const prices: TimeAndPrice[] = [
                 {timestamp: 1730844000, price: 74.83},
                 {timestamp: 1730847600, price: -45},
                 {timestamp: 1730851200, price: 0},
@@ -70,17 +70,17 @@ describe('addVatToPrice', () => {
             const result = formatTimeAndPrice(prices)
 
             expect(result[0].time).toBe('00:00')
-            expect(result[0].price).toBe('9.13')
+            expect(result[0].price).toBe(9.13)
 
             expect(result[1].time).toBe('01:00')
-            expect(result[1].price).toBe('-5.49')
+            expect(result[1].price).toBe(-5.49)
 
             expect(result[2].time).toBe('02:00')
-            expect(result[2].price).toBe('0.00')
+            expect(result[2].price).toBe(0.00)
         });
 
         it('should handle empty list correctly', () => {
-            const prices: PriceWithTime[] = []
+            const prices: TimeAndPrice[] = []
 
             const result = formatTimeAndPrice(prices)
 
@@ -88,13 +88,13 @@ describe('addVatToPrice', () => {
         });
 
         it('should handle one price in list correctly', () => {
-            const prices: PriceWithTime[] = [{timestamp: 1730844000, price: 74.83}]
+            const prices: TimeAndPrice[] = [{timestamp: 1730844000, price: 74.83}]
 
             const result = formatTimeAndPrice(prices)
 
             expect(result.length).toBe(1)
             expect(result[0].time).toBe('00:00')
-            expect(result[0].price).toBe('9.13')
+            expect(result[0].price).toBe(9.13)
         });
     });
 

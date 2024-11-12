@@ -9,7 +9,8 @@ export type Country = keyof typeof countries
 
 export type ISODate = `${number}-${number}-${number}`
 
-export type PriceWithTime = { timestamp: number; price: number };
-export type EleringPrices = Record<Country, PriceWithTime[]>
+export type TimeAndPrice = { timestamp: number; price: number }
 
-export type FormattedTimeAndPrice = { time: string; price: string };
+export type EleringPrices = Record<Country, TimeAndPrice[]>
+
+export type FormattedTimeAndPrice = { time: string; price: number }
