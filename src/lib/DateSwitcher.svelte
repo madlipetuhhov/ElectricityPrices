@@ -36,14 +36,14 @@
 
 <div class="date-container">
     <button
-            class="prev-button"
+            class="btn-prev"
             aria-label="Previous"
             on:click={prevDate}>
         <i class="mi mi-chevron-left"></i>
     </button>
     <input class="date-input" type="date" bind:value={date}/>
     <button
-            class="next-button"
+            class="btn-next"
             aria-label="Next"
             on:click={nextDate}
             class:disabled={isNextDateButtonDisabled()}
@@ -61,7 +61,7 @@
         margin: 2em auto;
     }
 
-    .prev-button, .next-button {
+    .btn-prev, .btn-next {
         cursor: pointer;
         padding: 0.55em 0.7em;
         color: #FFF9FA;
@@ -76,7 +76,7 @@
         font-weight: 700;
     }
 
-    .prev-button:hover, .next-button:hover, .date-input:hover {
+    .btn-prev:hover, .btn-next:hover, .date-input:hover {
         background-color: #806066;
     }
 
