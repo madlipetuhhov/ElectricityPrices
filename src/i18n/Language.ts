@@ -2,6 +2,7 @@ import type et from './et.json'
 import langs from './langs.json'
 
 type Lang = typeof langs[number]
+
 export let langCode: Lang = getLangCode()
 export let t: typeof et = await loadTranslation(langCode)
 
@@ -12,7 +13,12 @@ export function getLangCode(): Lang {
 }
 
 export async function loadTranslation(langCode: Lang) {
-    return await import(`./${langCode}.json`)
+    try {
+        return await import(`./${langCode}.json`)
+    } catch (error) {
+        console.error(`Failed to load translation for language: ${langCode}`)
+        return await import("./en.json")
+    }
 }
 
 export function changeLang(lang: Lang) {
