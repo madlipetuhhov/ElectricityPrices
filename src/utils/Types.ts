@@ -9,13 +9,6 @@ export const countries = {
 
 export type Country = keyof typeof countries
 
-export const languages = {
-    en: 'Inglise keel',
-    et: 'Eesti keel'
-}
-
-export type Language = keyof typeof languages
-
 export type ISODate = `${number}-${number}-${number}`
 
 export type TimeAndPrice = { timestamp: number; price: number }

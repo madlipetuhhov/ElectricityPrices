@@ -4,7 +4,7 @@
     import {formatTimeAndPrice} from "./utils/DataFormatter";
     import DateSwitcher from "./lib/DateSwitcher.svelte";
     import {fetchData, getPricesForCountry} from "./utils/DataFetcher";
-    import type {Country, EleringPrices, FormattedTimeAndPrice, ISODate, TimeAndPrice} from "./utils/Types";
+    import type {Country, EleringPrices, FormattedTimeAndPrice, ISODate, Lang, TimeAndPrice} from "./utils/Types";
     import {t} from "./i18n/Language";
     import LangSwitcher from "./lib/LangSwitcher.svelte";
 

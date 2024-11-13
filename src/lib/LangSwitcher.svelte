@@ -1,16 +1,12 @@
 <script lang="ts">
-    import {t} from "../i18n/Language.js"
-    import {languages, type Language} from "../utils/Types.js"
-
-    const langCodes = Object.keys(languages) as Language[]
-    export let langCode = langCodes[0]
-
+    import {changeLang, langCode, t} from "../i18n/Language.js"
+    import langs from "../i18n/langs.json"
 </script>
 
 <div class="lang-container">
-    <select class="lang-select" id="countryCode" bind:value={langCode}>
-        {#each langCodes as langCode}
-            <option class="lang-option" value={langCode}>{t.languages[langCode]}</option>
+    <select value={langCode} class="lang-select" id="langCode" on:change="{(event) => changeLang(event.currentTarget.value)}">
+        {#each langs as langCode}
+            <option class="lang-option" value={langCode}>{t.languages}</option>
         {/each}
     </select>
 </div>
