@@ -1,15 +1,29 @@
+import type { Lang } from '../utils/Types'
 import type et from './et.json'
 import langs from './langs.json'
-
-type Lang = typeof langs[number]
 
 export let langCode: Lang = getLangCode()
 export let t: typeof et = await loadTranslation(langCode)
 
 export function getLangCode(): Lang {
-    let langCode: Lang = navigator.language.split('-')[0]
-    if (langs.indexOf(langCode) < 0) langCode = langs[0]
-    return langCode
+    const langFromSession = getLangFromSession()
+    const langFromNavigator = getLangFromNavigator()
+
+    const selectedLang = langFromSession || langFromNavigator
+    return validateLangCode(selectedLang)
+}
+
+export function getLangFromSession(): string | null {
+    return sessionStorage.getItem('selectedLang')?.trim() || null
+}
+
+export function getLangFromNavigator(): string {
+    return navigator.language.split('-')[0]
+}
+
+export function validateLangCode(langCode: string): Lang {
+    if (langs.indexOf(langCode) < 0) return langs[0]
+    return langCode as Lang
 }
 
 export async function loadTranslation(langCode: Lang) {
@@ -21,7 +35,7 @@ export async function loadTranslation(langCode: Lang) {
     }
 }
 
-export function changeLang(lang: Lang) {
-    // save
-    // reload
+export function changeLang(langCode: Lang) {
+    sessionStorage.setItem('selectedLang', langCode)
+    window.location.reload()
 }

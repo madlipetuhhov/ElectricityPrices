@@ -1,45 +1,64 @@
 import {beforeEach, describe, expect, it, vi} from "vitest"
-import {getLangCode, loadTranslation} from "./Language"
+import {getLangCode, getLangFromNavigator, getLangFromSession, loadTranslation, validateLangCode} from "./Language"
 
 beforeEach(() => {
     vi.clearAllMocks()
 })
 
+describe('getLangFromSession', () => {
+    it('should return the language from sessionStorage if available', () => {
+        sessionStorage.setItem('selectedLang', 'fr')
+        const result = getLangFromSession()
+        expect(result).toBe('fr')
+    })
+
+    it('should return null if no language is set in sessionStorage', () => {
+        sessionStorage.removeItem('selectedLang')
+        const result = getLangFromSession()
+        expect(result).toBeNull()
+    })
+})
+
+describe('getLangFromNavigator', () => {
+    it('should return the correct language code from navigator.language', () => {
+        vi.spyOn(navigator, 'language', 'get').mockReturnValue('en-US')
+        const result = getLangFromNavigator()
+        expect(result).toBe('en')
+    })
+})
+
+describe('validateLangCode', () => {
+    it('should return the language if it is valid', () => {
+        const langCode = 'en'
+        const result = validateLangCode(langCode)
+        expect(result).toBe(langCode)
+    });
+
+    it('should return the fallback language if the language is invalid', () => {
+        const invalidLangCode = 'fr'
+        const result = validateLangCode(invalidLangCode)
+        expect(result).toBe('en')
+    });
+});
+
 describe('getLangCode', () => {
-    it('should extract language code correctly from navigator.language (with region)', () => {
-        let navigatorLang = 'en-US'
-        vi.spyOn(navigator, 'language', 'get').mockReturnValue(navigatorLang)
-
+    it('should return the language from sessionStorage if available', () => {
+        sessionStorage.setItem('selectedLang', 'et')
         const result = getLangCode()
+        expect(result).toBe('et')
+    });
 
-        expect(result).toBe('en')
+    it('should return the language from navigator.language if sessionStorage language is not available', () => {
+        sessionStorage.removeItem('selectedLang')
+        vi.spyOn(navigator, 'language', 'get').mockReturnValue('et')
+        const result = getLangCode()
+        expect(result).toBe('et')
     })
 
-    it('should apply navigator.language when it is in langs', () => {
-        let mockLangCode = 'en'
-        vi.spyOn(navigator, 'language', 'get').mockReturnValue(mockLangCode)
-
+    it('should return the fallback language if sessionStorage and navigator.language are not valid', () => {
+        sessionStorage.removeItem('selectedLang')
+        vi.spyOn(navigator, 'language', 'get').mockReturnValue('fr')
         const result = getLangCode()
-
-        expect(result).toContain(mockLangCode)
-        expect(result).toBe(mockLangCode)
-    })
-
-    it('should ensure fallback works when navigator.language is not in langs', () => {
-        let mockLangCode = 'fr'
-        vi.spyOn(navigator, 'language', 'get').mockReturnValue(mockLangCode)
-
-        const result = getLangCode()
-
-        expect(result).toBe('en')
-    })
-
-    it('should use the fallback language when navigator.language is undefined or empty', () => {
-        let emptyLangCode = ''
-        vi.spyOn(navigator, 'language', 'get').mockReturnValue(emptyLangCode)
-
-        const result = getLangCode()
-
         expect(result).toBe('en')
     })
 })
@@ -66,5 +85,10 @@ describe('loadTranslation', () => {
         expect(result.title).toEqual(mockFallbackTranslation.title)
         expect(console.error).toHaveBeenCalledWith(`Failed to load translation for language: ${mockLangCode}`)
     })
+})
 
+describe('changeLang', () => {
+    it('should set selected lang correctly', () => {
+
+    })
 })
