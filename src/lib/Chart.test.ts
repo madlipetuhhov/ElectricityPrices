@@ -1,6 +1,6 @@
 import {describe, expect, it} from "vitest";
 import type {FormattedTimeAndPrice} from "../utils/Types";
-import {calcDailyMaxPrice, calcDailyMinPrice} from "../lib/Chart.svelte";
+import {calcDailyMaxPrice, calcDailyMinPrice} from "./Chart.svelte";
 
 describe('Chart', () => {
     const testFormattedTimesAndPrices: FormattedTimeAndPrice[] = [

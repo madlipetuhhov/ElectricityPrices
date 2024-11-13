@@ -1,6 +1,6 @@
 import {describe, expect, it} from "vitest"
 import {fireEvent, render} from "@testing-library/svelte"
-import DateSwitcher from "../lib/DateSwitcher.svelte"
+import DateSwitcher from "./DateSwitcher.svelte"
 
 describe('DateSwitcher', () => {
     const mockDate = '2024-11-08'

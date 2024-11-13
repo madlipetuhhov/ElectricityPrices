@@ -1,5 +1,5 @@
 import {describe, expect, it} from "vitest";
-import CountrySelector from "../lib/CountrySelector.svelte";
+import CountrySelector from "./CountrySelector.svelte";
 import {fireEvent, render} from "@testing-library/svelte";
 
 describe('CountrySelector', () => {

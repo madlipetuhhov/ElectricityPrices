@@ -11,7 +11,7 @@
 <script lang="ts">
     import type {FormattedTimeAndPrice} from "../utils/Types"
     import Bar from "./Bar.svelte";
-    import {t} from "../i18n";
+    import {t} from "../i18n/Language";
 
     export let formattedTimesAndPrices: FormattedTimeAndPrice[]
 

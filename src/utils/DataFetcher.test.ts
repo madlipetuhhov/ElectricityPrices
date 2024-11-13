@@ -1,8 +1,7 @@
-import {beforeEach, describe, expect, it, test, vi} from "vitest"
-import {act, render} from "@testing-library/svelte"
-import type {Country, EleringPrices, ISODate} from "../utils/Types"
+import {beforeEach, describe, expect, it, vi} from "vitest"
+import type {Country, EleringPrices, ISODate} from "./Types"
 import {tick} from "svelte"
-import {fetchData, getFetchUrl, getPricesForCountry} from "../utils/DataFetcher"
+import {fetchData, getFetchUrl, getPricesForCountry} from "./DataFetcher"
 
 beforeEach(() => {
     vi.clearAllMocks()

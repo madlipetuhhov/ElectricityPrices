@@ -5,7 +5,7 @@
     import DateSwitcher from "./lib/DateSwitcher.svelte";
     import {fetchData, getPricesForCountry} from "./utils/DataFetcher";
     import type {Country, EleringPrices, FormattedTimeAndPrice, ISODate, TimeAndPrice} from "./utils/Types";
-    import {t} from "./i18n";
+    import {t} from "./i18n/Language";
     import LangSwitcher from "./lib/LangSwitcher.svelte";
 
     export let prices: TimeAndPrice[]
@@ -30,9 +30,9 @@
         <h1 class="main-header">{t.title}</h1>
     </header>
     <div class="selector-container">
-        <LangSwitcher/>
         <DateSwitcher bind:date/>
         <CountrySelector bind:countryCode/>
+        <LangSwitcher/>
     </div>
     <div class="bar-chart">
         <Chart {formattedTimesAndPrices}/>

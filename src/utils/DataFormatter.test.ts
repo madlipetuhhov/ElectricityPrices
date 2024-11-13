@@ -1,6 +1,6 @@
 import {describe, it, expect} from "vitest";
-import {convertEuroMWhToCentKWh, addVatToPrice, formatTimeAndPrice} from "../utils/DataFormatter";
-import type {TimeAndPrice} from "../utils/Types";
+import {convertEuroMWhToCentKWh, addVatToPrice, formatTimeAndPrice} from "./DataFormatter";
+import type {TimeAndPrice} from "./Types";
 
 describe('convertEuroMWhToCentKWh', () => {
     it('should convert EUR/MWh to cent/kWh correctly', () => {
