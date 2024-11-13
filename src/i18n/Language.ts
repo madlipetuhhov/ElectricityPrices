@@ -1,4 +1,4 @@
-import type { Lang } from '../utils/Types'
+import type {Lang} from '../utils/Types'
 import type et from './et.json'
 import langs from './langs.json'
 
@@ -7,23 +7,27 @@ export let t: typeof et = await loadTranslation(langCode)
 
 export function getLangCode(): Lang {
     const langFromSession = getLangFromSession()
+    if (langFromSession) return langFromSession
+
     const langFromNavigator = getLangFromNavigator()
+    if (langFromNavigator) return langFromNavigator
 
-    const selectedLang = langFromSession || langFromNavigator
-    return validateLangCode(selectedLang)
+    return langs[0]
 }
 
-export function getLangFromSession(): string | null {
-    return sessionStorage.getItem('selectedLang')?.trim() || null
+export function getLangFromSession(): Lang | null {
+    let langFromSession = sessionStorage.getItem('selectedLang')?.trim()
+    return toLang(langFromSession)
 }
 
-export function getLangFromNavigator(): string {
-    return navigator.language.split('-')[0]
+export function getLangFromNavigator(): string | null {
+    let langFromNavigator = navigator.language.split('-')[0]
+    return toLang(langFromNavigator)
 }
 
-export function validateLangCode(langCode: string): Lang {
-    if (langs.indexOf(langCode) < 0) return langs[0]
-    return langCode as Lang
+function toLang(lang?: string): Lang | null {
+    if (!lang || !langs.includes(lang)) return null
+    return lang as Lang;
 }
 
 export async function loadTranslation(langCode: Lang) {

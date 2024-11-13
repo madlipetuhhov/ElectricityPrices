@@ -1,5 +1,12 @@
 import {beforeEach, describe, expect, it, vi} from "vitest"
-import {getLangCode, getLangFromNavigator, getLangFromSession, loadTranslation, validateLangCode} from "./Language"
+import {
+    getLangCode,
+    getLangFromNavigator,
+    getLangFromSession,
+    loadTranslation,
+    changeLang
+} from "./Language"
+import type {Lang} from "../utils/Types"
 
 beforeEach(() => {
     vi.clearAllMocks()
@@ -25,21 +32,13 @@ describe('getLangFromNavigator', () => {
         const result = getLangFromNavigator()
         expect(result).toBe('en')
     })
+
+    it('should return null if no language is set in navigator.language', () => {
+        vi.spyOn(navigator, 'language', 'get').mockReturnValue('')
+        const result = getLangFromNavigator()
+        expect(result).toBeNull()
+    })
 })
-
-describe('validateLangCode', () => {
-    it('should return the language if it is valid', () => {
-        const langCode = 'en'
-        const result = validateLangCode(langCode)
-        expect(result).toBe(langCode)
-    });
-
-    it('should return the fallback language if the language is invalid', () => {
-        const invalidLangCode = 'fr'
-        const result = validateLangCode(invalidLangCode)
-        expect(result).toBe('en')
-    });
-});
 
 describe('getLangCode', () => {
     it('should return the language from sessionStorage if available', () => {
@@ -66,7 +65,7 @@ describe('getLangCode', () => {
 describe('loadTranslation', () => {
     it('should load the correct translation file for the selected language', async () => {
         const mockLangCode = 'et'
-        const mockEstonianTranslation = { title: 'Elektrihinnad' }
+        const mockEstonianTranslation = {title: 'Elektrihinnad'}
         vi.mock('../et.json', () => Promise.resolve(mockEstonianTranslation))
 
         const result = await loadTranslation(mockLangCode)
@@ -75,20 +74,27 @@ describe('loadTranslation', () => {
     })
 
     it('should log an error and fall back to the default translation file if import fails', async () => {
-        const mockLangCode = 'fr'
-        const mockFallbackTranslation = { title: 'Electricity prices' }
+        const languageCode = 'fr'
+        const mockFallbackTranslation = {title: 'Electricity prices'}
         vi.spyOn(console, 'error').mockImplementation(() => {})
         vi.mock('../en.json', () => Promise.resolve(mockFallbackTranslation))
 
-        const result = await loadTranslation(mockLangCode)
+        const result = await loadTranslation(languageCode)
 
         expect(result.title).toEqual(mockFallbackTranslation.title)
-        expect(console.error).toHaveBeenCalledWith(`Failed to load translation for language: ${mockLangCode}`)
+        expect(console.error).toHaveBeenCalledWith(`Failed to load translation for language: ${languageCode}`)
     })
 })
 
 describe('changeLang', () => {
-    it('should set selected lang correctly', () => {
+    it('should set the correct langCode in sessionStorage and reload the page', () => {
+        sessionStorage.clear()
+        vi.stubGlobal('location', {reload: vi.fn()})
+        const langCode: Lang = 'en'
 
+        changeLang(langCode)
+
+        expect(sessionStorage.getItem('selectedLang')).toEqual('en')
+        expect(location.reload).toHaveBeenCalled()
     })
 })

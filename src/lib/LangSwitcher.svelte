@@ -3,6 +3,8 @@
     import langs from "../i18n/langs.json"
 </script>
 
+<!--todo: kui vahetan keelt, siis l2heb tagasi eesti hindade peale valik-->
+
 <div class="lang-container">
     <select value={langCode} class="lang-select" id="langCode" on:change="{(event) => changeLang(event.currentTarget.value)}">
         {#each langs as langCode}
