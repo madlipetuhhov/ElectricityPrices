@@ -9,5 +9,9 @@
   "units": {
     "cent": "s",
     "kWh": "kWh"
+  },
+  "languages": {
+    "en": "Inglise keel",
+    "et": "Eesti keel"
   }
 }

@@ -9,5 +9,9 @@
   "units": {
     "cent": "c",
     "kWh": "kWh"
+  },
+  "languages": {
+    "en": "English",
+    "et": "Estonian"
   }
 }

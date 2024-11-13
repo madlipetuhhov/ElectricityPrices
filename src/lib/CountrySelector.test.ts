@@ -30,7 +30,7 @@ describe('CountrySelector', () => {
 
     it('dropdown should update the selected country', async () => {
         const {container} = render(CountrySelector, {countryCode: 'ee'})
-        const selector = container.querySelector('.country-select') as HTMLSelectElement
+        const selector = container.querySelector('.lang-select') as HTMLSelectElement
 
         await fireEvent.change(selector, {target: {value: 'fi'}})
 

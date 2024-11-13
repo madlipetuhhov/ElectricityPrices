@@ -4,6 +4,8 @@
     export let dailyMax: number
 </script>
 
+<!--todo: tests and data formatting here (smaller window only hour seen)-->
+
 <div class="bar-container">
     <div class="bar negative"
          class:negative={price < 0}

@@ -31,10 +31,10 @@
 </script>
 
 <div class="chart-container">
-    <div class="y-axis-labels">
+    <div class="y-axis-container">
         {#each yAxisValues as {label}, i}
-            <div class="y-axis-line" style="top: {i * 25}%"></div>
-            <div class="y-axis-label" style="top: {i * 25}%">{label}</div>
+            <div class="y-line" style="top: {i * 25}%"></div>
+            <div class="y-label" style="top: {i * 25}%">{label}</div>
         {/each}
     </div>
     <div class="bar-chart">
@@ -59,7 +59,7 @@
         height: 40vh;
     }
 
-    .y-axis-labels {
+    .y-axis-container {
         position: absolute;
         left: 0;
         width: 100%;
@@ -71,7 +71,7 @@
         height: 100%;
     }
 
-    .y-axis-line {
+    .y-line {
         position: absolute;
         left: 0;
         width: 100%;
@@ -79,7 +79,7 @@
         border-top: 0.1em dotted #B3868E;
     }
 
-    .y-axis-label {
+    .y-label {
         position: absolute;
         left: -5em;
         transform: translateY(-50%);

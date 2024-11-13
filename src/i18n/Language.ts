@@ -24,5 +24,4 @@ export async function loadTranslation(langCode: Lang) {
 export function changeLang(lang: Lang) {
     // save
     // reload
-//     kutsun selle valja lang komponendis
 }
