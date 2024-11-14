@@ -6,17 +6,8 @@ export let langCode: Lang = detectLang()
 export let t: typeof et = await loadTranslation(langCode)
 
 export function detectLang(): Lang {
-    return getLangFromSession() ?? getLangFromNavigator() ?? langs[0]
-}
-
-function getLangFromSession(): Lang | undefined {
-    const langFromSession = sessionStorage['selectedLang']
-    return ensureSupportedLang(langFromSession)
-}
-
-function getLangFromNavigator(): Lang | undefined {
-    const langFromNavigator = navigator.language.split('-')[0]
-    return ensureSupportedLang(langFromNavigator)
+    const lang = ensureSupportedLang(sessionStorage['selectedLang'] ?? navigator.language.split('-')[0])
+    return lang ?? langs[0]
 }
 
 function ensureSupportedLang(lang?: string): Lang | undefined {
