@@ -4,7 +4,7 @@ import {
     getLangFromNavigator,
     getLangFromSession,
     loadTranslation,
-    changeLang
+    changeLang, toLang
 } from "./Language"
 import type {Lang} from "../utils/Types"
 
@@ -13,21 +13,27 @@ beforeEach(() => {
 })
 
 describe('getLangFromSession', () => {
-    it('should return the language from sessionStorage if available', () => {
-        sessionStorage.setItem('selectedLang', 'fr')
+    it('should return the language from sessionStorage if available and in langs available', () => {
+        sessionStorage.setItem('selectedLang', 'en')
         const result = getLangFromSession()
-        expect(result).toBe('fr')
+        expect(result).toBe('en')
     })
 
     it('should return null if no language is set in sessionStorage', () => {
-        sessionStorage.removeItem('selectedLang')
+        sessionStorage.setItem('selectedLang', '')
+        const result = getLangFromSession()
+        expect(result).toBeNull()
+    })
+
+    it('should return null if language not available in langs', () => {
+        sessionStorage.setItem('selectedLang', 'fr')
         const result = getLangFromSession()
         expect(result).toBeNull()
     })
 })
 
 describe('getLangFromNavigator', () => {
-    it('should return the correct language code from navigator.language', () => {
+    it('should return the language code from navigator.language and in langs available', () => {
         vi.spyOn(navigator, 'language', 'get').mockReturnValue('en-US')
         const result = getLangFromNavigator()
         expect(result).toBe('en')
@@ -37,6 +43,34 @@ describe('getLangFromNavigator', () => {
         vi.spyOn(navigator, 'language', 'get').mockReturnValue('')
         const result = getLangFromNavigator()
         expect(result).toBeNull()
+    })
+
+    it('should return null if language not available in langs', () => {
+        vi.spyOn(navigator, 'language', 'get').mockReturnValue('fr')
+        const result = getLangFromNavigator()
+        expect(result).toBeNull()
+    })
+})
+
+describe('to Lang', () => {
+    it('should return null if lang is undefined', () => {
+        const result = toLang()
+        expect(result).toBeNull()
+    })
+
+    it('should return null if lang is an empty string', () => {
+        const result = toLang('')
+        expect(result).toBeNull()
+    })
+
+    it('should return null if lang is not in the langs array', () => {
+        const result = toLang('fr')
+        expect(result).toBeNull()
+    })
+
+    it('should return the lang if it is a valid language code', () => {
+        const result = toLang('et')
+        expect(result).toBe('et')
     })
 })
 

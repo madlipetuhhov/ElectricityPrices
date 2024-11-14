@@ -20,12 +20,12 @@ export function getLangFromSession(): Lang | null {
     return toLang(langFromSession)
 }
 
-export function getLangFromNavigator(): string | null {
+export function getLangFromNavigator(): Lang | null {
     let langFromNavigator = navigator.language.split('-')[0]
     return toLang(langFromNavigator)
 }
 
-function toLang(lang?: string): Lang | null {
+export function toLang(lang?: string): Lang | null {
     if (!lang || !langs.includes(lang)) return null
     return lang as Lang;
 }
