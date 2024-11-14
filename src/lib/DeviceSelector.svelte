@@ -1,27 +1,28 @@
 <script lang="ts">
-    import {countries, type Country} from "../utils/Types";
     import {t} from "../i18n/Language";
+    import {type Device, devices} from "../utils/Types";
 
-    const countryCodes = Object.keys(countries) as Country[]
-    export let countryCode = countryCodes[0]
+    const deviceCodes = Object.keys(devices) as Device []
+    let deviceCode = deviceCodes[0]
 </script>
+<!--todo: default kuvab "vali seade"-->
 
-<div class="country-container">
-    <select class="country-select" bind:value={countryCode}>
-        {#each countryCodes as countryCode}
-            <option value={countryCode}>{t.countries[countryCode]}</option>
+<div class="device-container">
+    <select class="device-select" bind:value={deviceCode}>
+        {#each deviceCodes as deviceCode}
+            <option value={deviceCode}>{t.devices[deviceCode]}</option>
         {/each}
     </select>
 </div>
 
 <style>
-    .country-container {
+    .device-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
-    .country-select {
+    .device-select {
         cursor: pointer;
         padding: 0.4em 0.7em;
         font-size: 1.6em;
@@ -33,11 +34,11 @@
         outline: none;
     }
 
-    .country-select:hover {
+    .device-select:hover {
         background-color: #806066;
     }
 
-    .country-select:focus {
+    .device-select:focus {
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
 </style>

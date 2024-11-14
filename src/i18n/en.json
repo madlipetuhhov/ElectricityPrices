@@ -13,5 +13,14 @@
   "languages": {
     "en": "English",
     "et": "Estonian"
+  },
+  "devices": {
+    "CAR": "Mercedes Benz EQE (7200 watts)",
+    "OR": "Oura ring (5 watts)",
+    "MP": "Iphone 16 Pro Max (30 watts)",
+    "DV": "Dyson V15 vacuum (230 watts)",
+    "DA": "Dyson Airwrap (1300 watts)",
+    "IPL": "Lumea IPL (240 watts)",
+    "MX": "KitchenAid stand mixer (300 watts)"
   }
 }

@@ -5,8 +5,8 @@
 
 <!--todo: kui vahetan keelt, siis l2heb tagasi eesti hindade peale valik-->
 
-<div class="lang-container">
-    <select value={langCode} class="lang-select" on:change={(event) => changeLang(event.currentTarget.value)}>
+<div class="country-container">
+    <select value={langCode} class="country-select" on:change={(event) => changeLang(event.currentTarget.value)}>
         {#each langs as langCode}
             <option value={langCode}>{t.languages[langCode]}</option>
         {/each}
@@ -14,13 +14,13 @@
 </div>
 
 <style>
-    .lang-container {
+    .country-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
-    .lang-select {
+    .country-select {
         cursor: pointer;
         padding: 0.4em 0.7em;
         font-size: 1.6em;
@@ -32,11 +32,11 @@
         outline: none;
     }
 
-    .lang-select:hover {
+    .country-select:hover {
         background-color: #806066;
     }
 
-    .lang-select:focus {
+    .country-select:focus {
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
 </style>

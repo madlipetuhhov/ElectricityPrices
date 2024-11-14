@@ -24,7 +24,7 @@ describe('LangSwitcher', () => {
 
     it('can change language', async () => {
         const {container} = render(LangSwitcher)
-        const select = container.querySelector('.lang-select') as HTMLSelectElement
+        const select = container.querySelector('.country-select') as HTMLSelectElement
 
         expect(select).toBeInTheDocument()
         expect(select.value).toEqual('en')

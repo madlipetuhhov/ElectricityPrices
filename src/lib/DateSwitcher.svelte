@@ -4,6 +4,7 @@
     export let date: ISODate
     let nextDaySelected = false
 
+    // todo: disabled button
     // The DayAhead prices are available around 13:00 CET/CEST.
     function isNextDateButtonDisabled(): boolean {
         const today = new Date()

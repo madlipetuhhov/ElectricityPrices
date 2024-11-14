@@ -7,6 +7,7 @@
     import type {Country, EleringPrices, FormattedTimeAndPrice, ISODate, Lang, TimeAndPrice} from "./utils/Types";
     import {t} from "./i18n/Language";
     import LangSwitcher from "./lib/LangSwitcher.svelte";
+    import DeviceSelector from "./lib/DeviceSelector.svelte";
 
     export let prices: TimeAndPrice[]
     export let formattedTimesAndPrices: FormattedTimeAndPrice[]
@@ -16,9 +17,7 @@
     let loadedPrices: EleringPrices | undefined
 
     $: fetchData(date).then(r => loadedPrices = r)
-    $: {
-        if (loadedPrices) prices = getPricesForCountry(loadedPrices, countryCode)
-    }
+    $: if (loadedPrices) prices = getPricesForCountry(loadedPrices, countryCode)
     $: formattedTimesAndPrices = formatTimeAndPrice(prices)
 </script>
 
@@ -32,6 +31,7 @@
     <div class="selector-container">
         <DateSwitcher bind:date/>
         <CountrySelector bind:countryCode/>
+        <DeviceSelector/>
         <LangSwitcher/>
     </div>
     <div class="bar-chart">

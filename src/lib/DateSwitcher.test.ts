@@ -34,7 +34,7 @@ describe('DateSwitcher', () => {
         const expectedOneClick = '2024-11-09'
         expect(container.querySelector('input')!.value).toBe(expectedOneClick)
     })
-
+    // todo: all tests
     it('should disable "Next" button before 13:00', () => {
 
     })
