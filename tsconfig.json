@@ -15,6 +15,7 @@
     "checkJs": true,
     "strict": true,
     "isolatedModules": true,
+    "suppressImplicitAnyIndexErrors": true,
     "moduleDetection": "force"
   },
   "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],

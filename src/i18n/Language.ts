@@ -24,7 +24,7 @@ export async function loadTranslation(langCode: Lang) {
     }
 }
 
-export function changeLang(langCode: Lang) {
+export async function changeLang(langCode: Lang) {
     sessionStorage.setItem('selectedLang', langCode)
     window.location.reload()
 }

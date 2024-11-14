@@ -6,9 +6,9 @@
 <!--todo: kui vahetan keelt, siis l2heb tagasi eesti hindade peale valik-->
 
 <div class="lang-container">
-    <select value={langCode} class="lang-select" id="langCode" on:change="{(event) => changeLang(event.currentTarget.value)}">
+    <select value={langCode} class="lang-select" on:change={(event) => changeLang(event.currentTarget.value)}>
         {#each langs as langCode}
-            <option class="lang-option" value={langCode}>{t.languages[langCode]}</option>
+            <option value={langCode}>{t.languages[langCode]}</option>
         {/each}
     </select>
 </div>
