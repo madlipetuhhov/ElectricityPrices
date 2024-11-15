@@ -1,4 +1,4 @@
-import type {Country, EleringPrices, ISODate, TimeAndPrice} from "./Types";
+import type {Country, DayPricesCentsPerKWh, EleringPrices, ISODate, TimeAndPrice} from "./Types";
 
 export function getFetchUrl(date: ISODate) {
     const startTime = new Date(date + 'T00:00').toISOString()
@@ -19,7 +19,24 @@ export async function fetchData(date: ISODate): Promise<EleringPrices> {
     }
 }
 
-export function getPricesForCountry(allPrices: EleringPrices, countryCode: Country): TimeAndPrice[] {
+export function getPricesForCountry(allPrices: EleringPrices, countryCode: Country): DayPricesCentsPerKWh {
     if (!allPrices[countryCode]) throw new Error('Country code not found')
-    return allPrices[countryCode]
+    const dayPricesForCountry: DayPricesCentsPerKWh = []
+
+    allPrices[countryCode].map(({price}) => {
+        const priceInCentsKWh = convertEuroMWhToCentKWh(price)
+        const priceWithVat = addVatToPrice(priceInCentsKWh)
+        const roundedPrice = Math.round(priceWithVat * 100) / 100
+        dayPricesForCountry.push(roundedPrice)
+    })
+
+    return dayPricesForCountry
+}
+
+function convertEuroMWhToCentKWh(price: number): number {
+    return (price * 100) / 1000
+}
+
+function addVatToPrice(price: number): number {
+    return price * 1.22
 }

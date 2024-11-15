@@ -1,11 +1,7 @@
-import {beforeEach, describe, expect, it, vi} from "vitest"
-import type {Country, EleringPrices, ISODate} from "./Types"
+import {describe, expect, it, vi} from "vitest"
+import type {Country, DayPricesCentsPerKWh, EleringPrices, ISODate} from "./Types"
 import {tick} from "svelte"
 import {fetchData, getFetchUrl, getPricesForCountry} from "./DataFetcher"
-
-beforeEach(() => {
-    vi.clearAllMocks()
-})
 
 const testResponseData = {
     success: true,
@@ -15,8 +11,8 @@ const testResponseData = {
             {timestamp: 1730894400, price: 89.2300},
         ],
         'lv': [
-            {timestamp: 1730890800, price: 74.8300},
-            {timestamp: 1730894400, price: 89.2300},
+            {timestamp: 1730890800, price: 75.5000},
+            {timestamp: 1730894400, price: 65.2300},
         ]
     } as EleringPrices
 }
@@ -85,13 +81,14 @@ describe('fetchData', () => {
 })
 
 describe('getPricesForCountry', () => {
-    it('should return prices and times for specific country', () => {
-        const countryCode: Country = 'ee'
+    it('should return prices for specific country', () => {
+        const countryCode: Country = 'lv'
+        const expectedPrices = [9.21, 7.96]
         const result = getPricesForCountry(testResponseData.data, countryCode)
-        expect(result).toEqual(testResponseData.data[countryCode])
+        expect(result).toEqual(expectedPrices)
     })
 
-    it('should throw an error when country code does not exist', async () => {
+    it('should throw an error when country code does not exist', () => {
         const countryCode: any = 'fr'
         expect(() => getPricesForCountry(testResponseData.data, countryCode)).toThrow('Country code not found')
     })

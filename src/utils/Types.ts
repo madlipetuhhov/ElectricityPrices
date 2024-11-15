@@ -10,18 +10,20 @@ export const countries = {
 export type Country = keyof typeof countries
 
 export const devices = {
-    CAR: "Mercedes Benz EQE (7200 watts)",
-    OR: "Oura sõrmus (5 watts)",
-    MP: "Iphone 16 Pro Max (30 watts)",
-    DV: "Dyson V15 tolmuimeja (230 watts)",
-    DA: "Dyson Airwrap (1300 watts)",
-    IPL: "Lumea fotoepilaator (240 watts)",
-    MX: "KitchenAid lauamikser (300 watts)"
+    CAR: { name: "Mercedes Benz EQE", powerInWatts: 7200 },
+    OR: { name: "Oura sõrmus", powerInWatts: 5 },
+    MP: { name: "Iphone 16 Pro Max", powerInWatts: 30 },
+    DV: { name: "Dyson V15 tolmuimeja", powerInWatts: 230 },
+    DA: { name: "Dyson Airwrap", powerInWatts: 1300 },
+    IPL: { name: "Lumea fotoepilaator", powerInWatts: 240 },
+    MX: { name: "KitchenAid lauamikser", powerInWatts: 300 }
 }
 
 export type Device = keyof typeof devices
 
 export type ISODate = `${number}-${number}-${number}`
+
+export type DayPricesCentsPerKWh = number[]
 
 export type TimeAndPrice = { timestamp: number; price: number }
 
