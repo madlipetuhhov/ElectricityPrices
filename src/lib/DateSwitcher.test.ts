@@ -3,15 +3,15 @@ import {fireEvent, render} from "@testing-library/svelte"
 import DateSwitcher from "./DateSwitcher.svelte"
 
 describe('DateSwitcher', () => {
-    const mockDate = '2024-11-08'
+    const testDate = '2024-11-08'
 
     it('should display the correct default date', () => {
-        const {container} = render(DateSwitcher, {props: {date: mockDate}})
-        expect(container.querySelector('input')!.value).toBe(mockDate)
+        const {container} = render(DateSwitcher, {props: {date: testDate}})
+        expect(container.querySelector('input')!.value).toBe(testDate)
     })
 
     it('should update date when clicking "Previous" button', async () => {
-        const {container} = render(DateSwitcher, {props: {date: mockDate}})
+        const {container} = render(DateSwitcher, {props: {date: testDate}})
         const prevButton = container.querySelector('.btn-prev')!
 
         await fireEvent.click(prevButton)
@@ -26,7 +26,7 @@ describe('DateSwitcher', () => {
     })
 
     it('should update date when clicking "Next" button', async () => {
-        const {container} = render(DateSwitcher, {props: {date: mockDate}})
+        const {container} = render(DateSwitcher, {props: {date: testDate}})
         const nextButton = container.querySelector('.btn-next')!
 
         await fireEvent.click(nextButton)

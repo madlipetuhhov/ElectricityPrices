@@ -2,7 +2,6 @@ import {afterEach, describe, expect, it, vi} from "vitest"
 import en from './en.json'
 import et from './et.json'
 import {changeLang, detectLang, loadTranslation} from "./Language"
-import type {Lang} from "../utils/Types"
 
 afterEach(() => {
     sessionStorage.clear()

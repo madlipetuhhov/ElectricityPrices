@@ -12,7 +12,7 @@ const testResponseData = {
         ],
         'lv': [
             {timestamp: 1730890800, price: 75.5000},
-            {timestamp: 1730894400, price: 65.2300},
+            {timestamp: 1730894400, price: -65.2300},
         ]
     } as EleringPrices
 }
@@ -83,7 +83,7 @@ describe('fetchData', () => {
 describe('getPricesForCountry', () => {
     it('should return prices for specific country', () => {
         const countryCode: Country = 'lv'
-        const expectedPrices = [9.21, 7.96]
+        const expectedPrices = [9.21, -7.96]
         const result = getPricesForCountry(testResponseData.data, countryCode)
         expect(result).toEqual(expectedPrices)
     })

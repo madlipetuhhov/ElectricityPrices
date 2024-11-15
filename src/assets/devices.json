@@ -1,0 +1,30 @@
+{
+  "CAR": {
+    "watts": 7200,
+    "hours": 6
+  },
+  "OR": {
+    "watts": 5,
+    "hours": 1.5
+  },
+  "MP": {
+    "watts": 30,
+    "hours": 4
+  },
+  "DV": {
+    "watts": 230,
+    "hours": 3
+  },
+  "DA": {
+    "watts": 1300,
+    "hours": 1
+  },
+  "IPL": {
+    "watts": 240,
+    "hours": 3
+  },
+  "MX": {
+    "watts": 300,
+    "hours": 1
+  }
+}
