@@ -1,24 +1,27 @@
 <script lang="ts">
     import CountrySelector from "./lib/CountrySelector.svelte";
     import Chart from "./lib/Chart.svelte";
-    import {formatTimeAndPrice} from "./utils/DataFormatter";
     import DateSwitcher from "./lib/DateSwitcher.svelte";
     import {fetchData, getPricesForCountry} from "./utils/DataFetcher";
-    import type {Country, EleringPrices, FormattedTimeAndPrice, ISODate, Lang, TimeAndPrice} from "./utils/Types";
+    import type {Country, DayPricesCentsPerKWh, EleringPrices, ISODate} from "./utils/Types";
     import {t} from "./i18n/Language";
     import LangSwitcher from "./lib/LangSwitcher.svelte";
     import DeviceSelector from "./lib/DeviceSelector.svelte";
 
-    export let prices: TimeAndPrice[]
-    export let formattedTimesAndPrices: FormattedTimeAndPrice[]
+    export let dayPricesForCountry: DayPricesCentsPerKWh
 
     let countryCode: Country = 'ee'
     let date = new Date().toISOString().split('T')[0] as ISODate
     let loadedPrices: EleringPrices | undefined
 
-    $: fetchData(date).then(r => loadedPrices = r)
-    $: if (loadedPrices) prices = getPricesForCountry(loadedPrices, countryCode)
-    $: formattedTimesAndPrices = formatTimeAndPrice(prices)
+    $: {
+        fetchData(date).then((r) => {
+            loadedPrices = r
+            if (loadedPrices) {
+                dayPricesForCountry = getPricesForCountry(loadedPrices, countryCode)
+            }
+        })
+    }
 </script>
 
 <main class="container">
@@ -31,11 +34,11 @@
     <div class="selector-container">
         <DateSwitcher bind:date/>
         <CountrySelector bind:countryCode/>
-        <DeviceSelector/>
+        <DeviceSelector {dayPricesForCountry}/>
         <LangSwitcher/>
     </div>
     <div class="bar-chart">
-        <Chart {formattedTimesAndPrices}/>
+        <Chart {dayPricesForCountry}/>
     </div>
 </main>
 

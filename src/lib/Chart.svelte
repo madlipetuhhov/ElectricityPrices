@@ -1,22 +1,22 @@
 <script lang="ts" module>
-    export function calcDailyMaxPrice(formattedTimeAndPrices: FormattedTimeAndPrice[]): number {
-        return Math.max(...formattedTimeAndPrices.map(i => i.price))
+    export function calcDailyMaxPrice(dayPricesForCountry: DayPricesCentsPerKWh): number{
+        return Math.max(...dayPricesForCountry)
     }
 
-    export function calcDailyMinPrice(formattedTimeAndPrices: FormattedTimeAndPrice[]): number {
-        return Math.min(...formattedTimeAndPrices.map(i => i.price))
+    export function calcDailyMinPrice(dayPricesForCountry: DayPricesCentsPerKWh): number {
+        return Math.min(...dayPricesForCountry)
     }
 </script>
 
 <script lang="ts">
-    import type {FormattedTimeAndPrice} from "../utils/Types"
     import Bar from "./Bar.svelte";
     import {t} from "../i18n/Language";
+    import type {DayPricesCentsPerKWh} from "../utils/Types";
 
-    export let formattedTimesAndPrices: FormattedTimeAndPrice[]
+    export let dayPricesForCountry: DayPricesCentsPerKWh = []
 
-    $: dailyMax = calcDailyMaxPrice(formattedTimesAndPrices)
-    $: dailyMin = calcDailyMinPrice(formattedTimesAndPrices)
+    $: dailyMax = calcDailyMaxPrice(dayPricesForCountry)
+    $: dailyMin = calcDailyMinPrice(dayPricesForCountry)
 
     $: yAxisValues = [
         {value: dailyMax, label: `${Math.round(dailyMax)} ${t.units.cent}/${t.units.kWh}`},
@@ -38,8 +38,8 @@
         {/each}
     </div>
     <div class="bar-chart">
-        {#each formattedTimesAndPrices as {time, price}}
-            <Bar {price} {time} {dailyMax}/>
+        {#each dayPricesForCountry as dayPrice, hour}
+            <Bar {dayPrice} {hour} {dailyMax}/>
         {/each}
     </div>
 </div>

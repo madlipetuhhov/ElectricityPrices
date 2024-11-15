@@ -1,20 +1,19 @@
 <script lang="ts">
     import {t} from "../i18n/Language";
 
-    export let price: number
-    export let time: string
+    export let dayPrice: number
+    export let hour: number
     export let dailyMax: number
 </script>
 
-<!--todo: bring data formatting here (smaller window only hours are seen)-->
-
 <div class="bar-container">
     <div class="bar negative"
-         class:negative={price < 0}
-         style="height: {Math.abs(price / dailyMax * 100)}%">
-        <div class="label">{price} {`${t.units.cent}/${t.units.kWh}`}</div>
+         class:negative={dayPrice < 0}
+         class:current-hour={hour === new Date().getHours()}
+         style="height: {Math.abs(dayPrice / dailyMax * 100)}%">
+        <div class="label">{dayPrice} {`${t.units.cent}/${t.units.kWh}`}</div>
     </div>
-    <div class="hour">{time}</div>
+    <div class="hour">{hour}</div>
 </div>
 
 <style>
@@ -42,7 +41,15 @@
     }
 
     .bar:hover {
-        background-color: #CC9AA2;
+        background-color: #B88A92;
+    }
+
+    .bar.current-hour {
+        background-color: #B88A92;
+    }
+
+    .bar.current-hour .label {
+        opacity: 1;
     }
 
     .negative {
