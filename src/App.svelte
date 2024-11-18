@@ -1,13 +1,13 @@
 <script lang="ts">
-    import CountrySelector from "./lib/CountrySelector.svelte";
-    import Chart from "./lib/Chart.svelte";
-    import DateSwitcher from "./lib/DateSwitcher.svelte";
-    import {fetchData, getPricesForCountry} from "./utils/DataFetcher";
-    import type {Country, DayPricesCentsPerKWh, Devices, EleringPrices, ISODate} from "./utils/Types";
-    import {t} from "./i18n/Language";
-    import LangSwitcher from "./lib/LangSwitcher.svelte";
-    import DeviceSelector from "./lib/DeviceSelector.svelte";
-    import DeviceChargingInfo from "./lib/DeviceInfo.svelte";
+    import CountrySelector from "./lib/CountrySelector.svelte"
+    import Chart from "./lib/Chart.svelte"
+    import DateSwitcher from "./lib/DateSwitcher.svelte"
+    import {fetchData, getPricesForCountry} from "./utils/DataFetcher"
+    import type {Country, DayPricesCentsPerKWh, EleringPrices, ISODate} from "./utils/Types"
+    import {t} from "./i18n/Language"
+    import LangSwitcher from "./lib/LangSwitcher.svelte"
+    import DeviceSelector from "./lib/DeviceSelector.svelte"
+    import DeviceChargingInfo from "./lib/DeviceInfo.svelte"
 
     export let dayPricesForCountry: DayPricesCentsPerKWh
     export let selectedDeviceCode: string

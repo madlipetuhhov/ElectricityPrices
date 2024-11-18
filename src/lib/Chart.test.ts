@@ -14,4 +14,5 @@ describe('Chart', () => {
         const result = calcDailyMinPrice(prices)
         expect(result).toBe(-5.55)
     })
+//     todo: more tests
 })
