@@ -34,7 +34,7 @@
     <div class="selector-container">
         <DateSwitcher bind:date/>
         <CountrySelector bind:countryCode/>
-<!--        <DeviceSelector/>-->
+        <DeviceSelector/>
         <LangSwitcher/>
     </div>
     <div class="bar-chart">

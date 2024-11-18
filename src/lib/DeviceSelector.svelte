@@ -1,10 +1,16 @@
 <script lang="ts">
     import {t} from "../i18n/Language";
-    import {type Device} from "../utils/Types"
+    import devices from "../assets/devices.json"
+    import type {Devices} from "../utils/Types";
 
+    const typedDevices: Devices = devices
+    export let deviceCodes: string[] = Object.keys(typedDevices)
+
+    let deviceCode: string = ''
     let powerInKW: number = 0
     let priceInCKWh: number = 0
 
+    $: console.log(deviceCode)
 </script>
 
 <div class="device-container">
