@@ -10,7 +10,7 @@
     import DeviceChargingInfo from "./lib/DeviceChargingInfo.svelte";
 
     export let dayPricesForCountry: DayPricesCentsPerKWh
-    export let selectedDeviceCode: Devices
+    export let selectedDeviceCode: string
 
     let countryCode: Country = 'ee'
     let date = new Date().toISOString().split('T')[0] as ISODate
@@ -41,7 +41,7 @@
         </div>
         <div class="device-container">
             <DeviceSelector bind:selectedDeviceCode/>
-            <DeviceChargingInfo {selectedDeviceCode}/>
+            <DeviceChargingInfo {dayPricesForCountry} {selectedDeviceCode}/>
         </div>
     </div>
     <div class="bar-chart">

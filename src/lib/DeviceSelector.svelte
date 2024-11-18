@@ -3,7 +3,7 @@
     import devices from "../assets/devices.json"
     import type {Devices} from "../utils/Types"
 
-    export let selectedDeviceCode: Devices
+    export let selectedDeviceCode: string
 
     const typedDevices: Devices = devices
     let deviceCodes: string[] = Object.keys(typedDevices)
