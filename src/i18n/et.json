@@ -1,7 +1,7 @@
 {
   "title": "Elektrihinnad",
   "loading": "Hinnad laevad...",
-  "load_cost": "Laadimise maksumuse nägemiseks vali seade.",
+  "load_cost": "Maksumuse nägemiseks vali seade.",
   "power_consumption": "Seadme võimsus",
   "usage_time": "Laadimise või kasutamise aeg",
   "cost": "Maksumus",
