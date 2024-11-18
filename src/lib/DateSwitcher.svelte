@@ -59,7 +59,6 @@
         justify-content: space-between;
         align-items: center;
         gap: 1em;
-        margin: 2em auto;
     }
 
     .btn-prev, .btn-next {

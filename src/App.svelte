@@ -31,11 +31,15 @@
     <header>
         <h1 class="main-header">{t.title}</h1>
     </header>
-    <div class="selector-container">
-        <DateSwitcher bind:date/>
-        <CountrySelector bind:countryCode/>
-        <DeviceSelector/>
-        <LangSwitcher/>
+    <div class="bar-container">
+        <div class="selector-container">
+            <DateSwitcher bind:date/>
+            <CountrySelector bind:countryCode/>
+            <LangSwitcher/>
+        </div>
+        <div class="device-container">
+            <DeviceSelector/>
+        </div>
     </div>
     <div class="bar-chart">
         <Chart {dayPricesForCountry}/>
@@ -48,15 +52,21 @@
         font-size: 5em;
     }
 
-    .selector-container {
+    .bar-container {
+        display: flex;
+        flex-direction: column;
+        gap: 3em;
+        width: 100%;
+    }
+
+    .selector-container, .device-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 5rem;
+        gap: 5em;
         background-color: #E6ADB7;
         border-radius: 7px;
-        padding-left: 2.5em;
-        padding-right: 2.5em;
+        padding: 2.5em;
     }
 
     .container {
