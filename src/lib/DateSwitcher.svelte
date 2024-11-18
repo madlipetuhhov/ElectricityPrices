@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {ISODate} from "../utils/Types";
+    import type {ISODate} from "../utils/Types"
 
     export let date: ISODate
     let nextDaySelected = false
@@ -9,26 +9,20 @@
     function isNextDateButtonDisabled(): boolean {
         const today = new Date()
         const tomorrow = new Date()
-
-        // kas valitud on tomorrow  -yes, disable.
-        // kell on tana vahem 13:00
-        // kell 10:00 hommikul (disabled): kell < 13 && date == tomorrow
-        // kell 14:00: ei ole disabled
         tomorrow.setDate(today.getDate() + 1)
+        // v6rdle j2rgmise p2vaga
         // console.log('homme ' + tomorrow.toISOString().split('T')[0] as ISODate, 'kasutaja valitud '+ date)
         return nextDaySelected
     }
 
     function prevDate() {
         const newDate = new Date(date)
-        // console.log('prevDate new date ' + newDate)
         newDate.setDate(newDate.getDate() - 1)
         date = newDate.toISOString().replace(/T.*/, '') as ISODate
     }
 
     function nextDate() {
         const newDate = new Date(date)
-        // console.log('nextDate new date ' + newDate)
         newDate.setDate(newDate.getDate() + 1)
         date = newDate.toISOString().replace(/T.*/, '') as ISODate
 
