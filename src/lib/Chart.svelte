@@ -54,8 +54,6 @@
     .bar-chart {
         display: flex;
         justify-content: space-between;
-        align-items: flex-end;
-        box-sizing: border-box;
         height: 40vh;
     }
 

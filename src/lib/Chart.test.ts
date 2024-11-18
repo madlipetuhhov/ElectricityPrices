@@ -1,23 +1,17 @@
-import {describe, expect, it} from "vitest";
-import type {FormattedTimeAndPrice} from "../utils/Types";
-import {calcDailyMaxPrice, calcDailyMinPrice} from "./Chart.svelte";
+import {describe, expect, it} from "vitest"
+import {calcDailyMaxPrice, calcDailyMinPrice} from "./Chart.svelte"
+import type {DayPricesCentsPerKWh} from "../utils/Types"
 
 describe('Chart', () => {
-    const testFormattedTimesAndPrices: FormattedTimeAndPrice[] = [
-        {time: '08:00', price: 5.12},
-        {time: '09:00', price: 12.12},
-        {time: '10:00', price: -5.55}
-    ]
+    const prices: DayPricesCentsPerKWh = [5.12, 12.12, -5.55]
 
     it('should calculate dailyMax price correctly', () => {
-        const result = calcDailyMaxPrice(testFormattedTimesAndPrices)
+        const result = calcDailyMaxPrice(prices)
         expect(result).toBe(12.12)
     })
 
     it('should calculate dailyMax price correctly', () => {
-        const result = calcDailyMinPrice(testFormattedTimesAndPrices)
+        const result = calcDailyMinPrice(prices)
         expect(result).toBe(-5.55)
     })
-
-
 })

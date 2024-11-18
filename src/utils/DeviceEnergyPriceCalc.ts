@@ -16,7 +16,7 @@ export function calcChargingCost(device: Device, dayPrices: DayPricesCentsPerKWh
     return totalCost
 }
 
-export function calcChargingCostPerHour(kW: number, dayPrices: DayPricesCentsPerKWh, hourIndex: number): number {
+function calcChargingCostPerHour(kW: number, dayPrices: DayPricesCentsPerKWh, hourIndex: number): number {
     const currentHourPrice = dayPrices[hourIndex]
     const priceInEuros = (kW * currentHourPrice) / 100
     return Math.round(priceInEuros * 100) / 100

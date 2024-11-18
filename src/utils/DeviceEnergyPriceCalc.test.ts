@@ -1,22 +1,6 @@
 import {describe, expect, it, vi} from "vitest";
-import {
-    calcChargingCost,
-    calcChargingCostPerHour
-} from "./DeviceEnergyPriceCalc";
-import type {Device, Devices} from "./Types";
-
-describe('calculateChargingCost', () => {
-    it('should return current hour charging cost', () => {
-        vi.setSystemTime(new Date('2024-11-05T00:00:00Z'))
-        const kW = 0.23
-        const startHourIndex = 2
-        const dayPrices = [1, 3.3, 6.2, 7.2, 8]
-
-        const result = calcChargingCostPerHour(kW, dayPrices, startHourIndex)
-
-        expect(result).toBe(0.01)
-    })
-})
+import {calcChargingCost} from "./DeviceEnergyPriceCalc";
+import type {Device} from "./Types";
 
 describe('calcChargingCost', () => {
     it('should return total cost according to default hours and current hour', () => {

@@ -1,5 +1,11 @@
 {
   "title": "Elektrihinnad",
+  "loading": "Hinnad laevad...",
+  "load_cost": "Laadimise maksumuse nägemiseks vali seade.",
+  "power_consumption": "Seadme võimsus",
+  "usage_time": "Laadimise või kasutamise aeg",
+  "cost": "Maksumus",
+  "choose_device": "Vali seade",
   "countries": {
     "ee": "Eesti",
     "lv": "Läti",
@@ -8,13 +14,15 @@
   },
   "units": {
     "cent": "s",
-    "kWh": "kWh"
+    "euro": "€",
+    "kWh": "kWh",
+    "watts": "vatti",
+    "hour": "h"
   },
   "languages": {
     "en": "Inglise keel",
     "et": "Eesti keel"
   },
-  "deviceMenu": "Vali seade",
   "devices": {
     "car": "Mercedes Benz EQE",
     "tracker": "Oura sõrmus",

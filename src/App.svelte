@@ -7,7 +7,7 @@
     import {t} from "./i18n/Language";
     import LangSwitcher from "./lib/LangSwitcher.svelte";
     import DeviceSelector from "./lib/DeviceSelector.svelte";
-    import DeviceChargingInfo from "./lib/DeviceChargingInfo.svelte";
+    import DeviceChargingInfo from "./lib/DeviceInfo.svelte";
 
     export let dayPricesForCountry: DayPricesCentsPerKWh
     export let selectedDeviceCode: string
@@ -28,7 +28,7 @@
 
 <main class="container">
     {#if !loadedPrices}
-        <div class="loading">Loading...</div>
+        <div class="loading">{t.loading}</div>
     {/if}
     <header>
         <h1 class="main-header">{t.title}</h1>
@@ -64,7 +64,6 @@
 
     .selector-container, .device-container {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         gap: 5em;
         background-color: #E6ADB7;
@@ -72,11 +71,20 @@
         padding: 2.5em;
     }
 
+    .selector-container {
+        justify-content: space-between;
+    }
+
     .container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
         gap: 2em;
+    }
+
+    .loading {
+        font-size: 3em;
+        font-weight: 600;
+        color: #B88A92;
     }
 </style>

@@ -70,6 +70,7 @@
         color: #FFF9FA;
         padding: 0.4em 0.7em;
         border-radius: 7px;
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
         z-index: 10;
     }
 

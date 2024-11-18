@@ -1,5 +1,11 @@
 {
   "title": "Electricity prices",
+  "loading": "Prices are loading...",
+  "load_cost": "Select a device to see the charge cost",
+  "power_consumption": "Device power",
+  "usage_time": "Charging or usage time",
+  "cost": "Cost",
+  "choose_device": "Choose device",
   "countries": {
     "ee": "Estonia",
     "lv": "Latvia",
@@ -8,13 +14,15 @@
   },
   "units": {
     "cent": "c",
-    "kWh": "kWh"
+    "euro": "€",
+    "kWh": "kWh",
+    "watts": "watts",
+    "hour": "h"
   },
   "languages": {
     "en": "English",
     "et": "Estonian"
   },
-  "deviceMenu": "Choose device",
   "devices": {
     "car": "Mercedes Benz EQE",
     "tracker": "Oura ring",

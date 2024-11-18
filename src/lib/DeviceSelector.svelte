@@ -12,7 +12,7 @@
 
 <div class="device-select-container">
     <select class="device-select" bind:value={selectedDeviceCode}>
-        <option class="default-option" value="" disabled selected>{t.deviceMenu}</option>
+        <option class="default-option" value="" disabled selected>{t.choose_device}</option>
         {#each deviceCodes as deviceCode}
             <option class="device-option" value={deviceCode}>{t.devices[deviceCode]}</option>
         {/each}
