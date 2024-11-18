@@ -1,16 +1,17 @@
 <script lang="ts">
     import {t} from "../i18n/Language";
-    import {type Device, devices} from "../utils/Types";
+    import {type Device} from "../utils/Types"
 
-    const deviceCodes = Object.keys(devices) as Device []
-    let deviceCode = deviceCodes[0]
+    let powerInKW: number = 0
+    let priceInCKWh: number = 0
+
 </script>
-<!--todo: default kuvab "vali seade"-->
 
 <div class="device-container">
     <select class="device-select" bind:value={deviceCode}>
+        <option class="default-option" value="" disabled selected>{t.deviceMenu}</option>
         {#each deviceCodes as deviceCode}
-            <option value={deviceCode}>{t.devices[deviceCode]}</option>
+            <option class="device-option" value={deviceCode}>{t.devices[deviceCode]}</option>
         {/each}
     </select>
 </div>

@@ -1,21 +1,21 @@
 {
-  "CAR": {
+  "car": {
     "watts": 7200,
     "hours": 6
   },
-  "OR": {
+  "tracker": {
     "watts": 5,
     "hours": 1.5
   },
-  "MP": {
+  "phone": {
     "watts": 30,
     "hours": 4
   },
-  "DV": {
+  "vacuum": {
     "watts": 230,
     "hours": 3
   },
-  "DA": {
+  "hairdryer": {
     "watts": 1300,
     "hours": 1
   },
@@ -23,7 +23,7 @@
     "watts": 240,
     "hours": 3
   },
-  "MX": {
+  "mixer": {
     "watts": 300,
     "hours": 1
   }

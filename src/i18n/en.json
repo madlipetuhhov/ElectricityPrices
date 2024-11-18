@@ -16,12 +16,12 @@
   },
   "deviceMenu": "Choose device",
   "devices": {
-    "CAR": "Mercedes Benz EQE",
-    "OR": "Oura ring",
-    "MP": "Iphone 16 Pro Max",
-    "DV": "Dyson V15 vacuum",
-    "DA": "Dyson Airwrap",
+    "car": "Mercedes Benz EQE",
+    "tracker": "Oura ring",
+    "phone": "Iphone 16 Pro Max",
+    "vacuum": "Dyson V15 vacuum",
+    "hairdryer": "Dyson Airwrap",
     "IPL": "Lumea IPL",
-    "MX": "KitchenAid stand mixer"
+    "mixer": "KitchenAid stand mixer"
   }
 }
