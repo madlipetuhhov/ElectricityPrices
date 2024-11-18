@@ -1,6 +1,6 @@
-import {describe, expect, it} from "vitest";
-import DeviceSelector from "./DeviceSelector.svelte";
-import {fireEvent, render} from "@testing-library/svelte";
+import {describe, expect, it} from "vitest"
+import DeviceSelector from "./DeviceSelector.svelte"
+import {fireEvent, render} from "@testing-library/svelte"
 
 describe('DeviceSelector', () => {
     const {container} = render(DeviceSelector)
@@ -27,5 +27,8 @@ describe('DeviceSelector', () => {
         expect(selector.value).toBe('IPL')
     })
 
+    it('should dispatch deviceChange event with correct deviceCode', async () => {
+
+    })
 
 })

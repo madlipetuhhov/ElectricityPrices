@@ -1,20 +1,17 @@
 <script lang="ts">
-    import {t} from "../i18n/Language";
+    import {t} from "../i18n/Language"
     import devices from "../assets/devices.json"
-    import type {Devices} from "../utils/Types";
+    import type {Devices} from "../utils/Types"
+
+    export let selectedDeviceCode: Devices
 
     const typedDevices: Devices = devices
-    export let deviceCodes: string[] = Object.keys(typedDevices)
+    let deviceCodes: string[] = Object.keys(typedDevices)
 
-    let deviceCode: string = ''
-    let powerInKW: number = 0
-    let priceInCKWh: number = 0
-
-    $: console.log(deviceCode)
 </script>
 
-<div class="device-container">
-    <select class="device-select" bind:value={deviceCode}>
+<div class="device-select-container">
+    <select class="device-select" bind:value={selectedDeviceCode}>
         <option class="default-option" value="" disabled selected>{t.deviceMenu}</option>
         {#each deviceCodes as deviceCode}
             <option class="device-option" value={deviceCode}>{t.devices[deviceCode]}</option>
@@ -23,7 +20,7 @@
 </div>
 
 <style>
-    .device-container {
+    .device-select-container {
         display: flex;
         justify-content: space-between;
         align-items: center;

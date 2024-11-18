@@ -3,12 +3,14 @@
     import Chart from "./lib/Chart.svelte";
     import DateSwitcher from "./lib/DateSwitcher.svelte";
     import {fetchData, getPricesForCountry} from "./utils/DataFetcher";
-    import type {Country, DayPricesCentsPerKWh, EleringPrices, ISODate} from "./utils/Types";
+    import type {Country, DayPricesCentsPerKWh, Devices, EleringPrices, ISODate} from "./utils/Types";
     import {t} from "./i18n/Language";
     import LangSwitcher from "./lib/LangSwitcher.svelte";
     import DeviceSelector from "./lib/DeviceSelector.svelte";
+    import DeviceChargingInfo from "./lib/DeviceChargingInfo.svelte";
 
     export let dayPricesForCountry: DayPricesCentsPerKWh
+    export let selectedDeviceCode: Devices
 
     let countryCode: Country = 'ee'
     let date = new Date().toISOString().split('T')[0] as ISODate
@@ -38,7 +40,8 @@
             <LangSwitcher/>
         </div>
         <div class="device-container">
-            <DeviceSelector/>
+            <DeviceSelector bind:selectedDeviceCode/>
+            <DeviceChargingInfo {selectedDeviceCode}/>
         </div>
     </div>
     <div class="bar-chart">
@@ -56,7 +59,7 @@
         display: flex;
         flex-direction: column;
         gap: 3em;
-        width: 100%;
+        max-width: 61em;
     }
 
     .selector-container, .device-container {
