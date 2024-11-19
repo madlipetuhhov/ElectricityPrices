@@ -1,13 +1,15 @@
 <script lang="ts">
-    import {changeLang, langCode, t} from "../i18n/Language.js"
-    import langs from "../i18n/langs.json"
+    export let options: { value: string; label: string }[] = []
+    export let value: string
 </script>
 
-<select value={langCode} on:change={(event) => changeLang(event.currentTarget.value)}>
-    {#each langs as langCode}
-        <option value={langCode}>{t.languages[langCode]}</option>
-    {/each}
-</select>
+<div>
+    <select bind:value={value}>
+        {#each options as {value, label}}
+            <option value={value}>{label}</option>
+        {/each}
+    </select>
+</div>
 
 <style>
     select {

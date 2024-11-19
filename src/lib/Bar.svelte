@@ -1,15 +1,24 @@
 <script lang="ts">
-    import {t} from "../i18n/Language";
+    import {t} from "../i18n/Language"
 
     export let dayPrice: number
     export let hour: number
     export let dailyMax: number
+
+    function isCurrentHour() {
+        const today = new Date()
+        const currentHour = today.getHours()
+        return hour === currentHour && today.getDate() === new Date().getDate()
+    }
+
+    $: isCurrent = isCurrentHour()
+
 </script>
 
 <div class="bar-container">
     <div class="bar negative"
          class:negative={dayPrice < 0}
-         class:current-hour={hour === new Date().getHours()}
+         class:current={isCurrent}
          style="height: {Math.abs(dayPrice / dailyMax * 100)}%">
         <div class="label">{dayPrice} {`${t.units.cent}/${t.units.kWh}`}</div>
     </div>
@@ -44,11 +53,11 @@
         background-color: #B88A92;
     }
 
-    .bar.current-hour {
+    .bar.current {
         background-color: #B88A92;
     }
 
-    .bar.current-hour .label {
+    .bar.current .label {
         opacity: 1;
     }
 

@@ -7,7 +7,7 @@
     import {t} from "./i18n/Language"
     import LangSwitcher from "./lib/LangSwitcher.svelte"
     import DeviceSelector from "./lib/DeviceSelector.svelte"
-    import DeviceChargingInfo from "./lib/DeviceInfo.svelte"
+    import DeviceInfo from "./lib/DeviceInfo.svelte"
 
     export let dayPricesForCountry: DayPricesCentsPerKWh
     export let selectedDeviceCode: string
@@ -41,7 +41,7 @@
         </div>
         <div class="device-container">
             <DeviceSelector bind:selectedDeviceCode/>
-            <DeviceChargingInfo {dayPricesForCountry} {selectedDeviceCode}/>
+            <DeviceInfo {dayPricesForCountry} {selectedDeviceCode}/>
         </div>
     </div>
     <div class="bar-chart">

@@ -2,30 +2,29 @@
     import type {ISODate} from "../utils/Types"
 
     export let date: ISODate
-    let nextDaySelected = false
+    let tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
 
-    // todo: disabled button
-    // The DayAhead prices are available around 13:00 CET/CEST.
-    function isNextDateButtonDisabled(): boolean {
-        const today = new Date()
-        const tomorrow = new Date()
-        tomorrow.setDate(today.getDate() + 1)
-        // v6rdle j2rgmise p2vaga
-        // console.log('homme ' + tomorrow.toISOString().split('T')[0] as ISODate, 'kasutaja valitud '+ date)
-        return nextDaySelected
+    // todo: does not work
+    function checkMaxDate(date: ISODate) {
+        const selectedDate = new Date(date)
+        return selectedDate >= tomorrow
     }
 
     function prevDate() {
         const newDate = new Date(date)
         newDate.setDate(newDate.getDate() - 1)
-        date = newDate.toISOString().replace(/T.*/, '') as ISODate
+        date = toISODate(newDate)
     }
-
     function nextDate() {
         const newDate = new Date(date)
         newDate.setDate(newDate.getDate() + 1)
-        date = newDate.toISOString().replace(/T.*/, '') as ISODate
+        date = toISODate(newDate)
 
+    }
+
+    function toISODate(date: Date) {
+        return date.toISOString().split('T')[0] as ISODate
     }
 </script>
 
@@ -41,8 +40,8 @@
             class="btn-next"
             aria-label="Next"
             on:click={nextDate}
-            class:disabled={isNextDateButtonDisabled()}
-            disabled={isNextDateButtonDisabled()}>
+            class:disabled={checkMaxDate(date)}
+            disabled={checkMaxDate(date)}>
         <i class="mi mi-chevron-right"></i>
     </button>
 </div>

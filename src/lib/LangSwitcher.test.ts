@@ -19,7 +19,7 @@ describe('LangSwitcher', () => {
         expect(options[0]).toHaveValue('en')
         expect(options[0]).toHaveTextContent('English')
         expect(options[1]).toHaveValue('et')
-        expect(options[1]).toHaveTextContent('Estonian')
+        expect(options[1]).toHaveTextContent('Eesti keel')
     })
 
     it('can change language', async () => {
